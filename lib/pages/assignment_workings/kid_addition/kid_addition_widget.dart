@@ -879,6 +879,9 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                           () async {
                                                                         var shouldSetState =
                                                                             false;
+
+                                                                        var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split("+").map((element) => element.replaceAll("=", "")).toList();
+
                                                                         // Call Attempt API
                                                                         _model.assignmentResponse = await LiveQuestionManagementGroup
                                                                             .attemptQuestionCall
@@ -901,7 +904,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                           additionalDetailsJson:
                                                                           [AdditionalDetailObjectStruct(
                                                                             mathOperation: "Addition",
-                                                                            mathSteps: [MathStepStruct(digit1: 0, digit2: 0, carry: 0, currSum: 0)]
+                                                                            mathSteps: [MathStepStruct(digit1: int.parse(listDigits[0]), digit2: int.parse(listDigits[1]), carry: 0, currSum: int.parse(FFAppState().ansList.join()))]
                                                                           ).toMap()],
                                                                           authToken: currentJwtToken,
                                                                         );

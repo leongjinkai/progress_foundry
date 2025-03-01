@@ -184,68 +184,76 @@ class _LandingWidgetState extends State<LandingWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 4.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    context.pushNamed('SignIn');
-                                  },
-                                  text: 'Sign in',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
+                              Builder(
+                                builder: (context) { 
+                                  if (!loggedIn) {
+                                  return Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          fontSize: () {
-                                            if (MediaQuery.sizeOf(context)
-                                                    .width <
-                                                kBreakpointSmall) {
-                                              return 12.0;
-                                            } else if (MediaQuery.sizeOf(
-                                                        context)
-                                                    .width <
-                                                kBreakpointMedium) {
-                                              return 12.0;
-                                            } else if (MediaQuery.sizeOf(
-                                                        context)
-                                                    .width <
-                                                kBreakpointLarge) {
-                                              return 14.0;
-                                            } else {
-                                              return 16.0;
-                                            }
-                                          }(),
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.normal,
+                                        0.0, 0.0, 0.0, 4.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        context.pushNamed('SignIn');
+                                      },
+                                      text: 'Sign in',
+                                      options: FFButtonOptions(
+                                        height: 40.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color: FlutterFlowTheme.of(context)
+                                                  .primary,
+                                              fontSize: () {
+                                                if (MediaQuery.sizeOf(context)
+                                                        .width <
+                                                    kBreakpointSmall) {
+                                                  return 12.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointMedium) {
+                                                  return 12.0;
+                                                } else if (MediaQuery.sizeOf(
+                                                            context)
+                                                        .width <
+                                                    kBreakpointLarge) {
+                                                  return 14.0;
+                                                } else {
+                                                  return 16.0;
+                                                }
+                                              }(),
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color:
+                                              FlutterFlowTheme.of(context).primary,
+                                          width: 1.0,
                                         ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
+                                        borderRadius: BorderRadius.circular(11.0),
+                                        hoverColor:
+                                            FlutterFlowTheme.of(context).primary,
+                                        hoverBorderSide: BorderSide(
+                                          color:
+                                              FlutterFlowTheme.of(context).primary,
+                                          width: 1.0,
+                                        ),
+                                        hoverTextColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
                                     ),
-                                    borderRadius: BorderRadius.circular(11.0),
-                                    hoverColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    hoverBorderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
-                                    ),
-                                    hoverTextColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
-                                ),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                                }
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
