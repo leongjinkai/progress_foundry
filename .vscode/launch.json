@@ -12,6 +12,12 @@
             "args": [
                 "--dart-define-from-file",
                 "development.env"
+            ],
+            "toolArgs": [
+                "-d",
+                "chrome",
+                "--web-browser-flag",
+                "--disable-web-security"
             ]
         },
         {

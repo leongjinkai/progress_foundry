@@ -52,12 +52,12 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
 
       if (StudentAssignmentStruct.maybeFromMap(
               (_model.responseQuestionList?.jsonBody ?? ''))!
-          .assignmentResponseDTOList
+          .assignmentQuestionResponseDTOList
           .isNotEmpty) {
         // New Set Selected QN Detail
         _model.newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))
-            ?.assignmentResponseDTOList
+            ?.assignmentQuestionResponseDTOList
             .firstOrNull
             ?.questionResponseDTO;
         // Set Loading False
@@ -65,7 +65,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
         safeSetState(() {});
         _model.divisionQnList = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentResponseDTOList
+            .assignmentQuestionResponseDTOList
             .toList()
             .cast<AssignmentResponseDTOStruct>();
         safeSetState(() {});
@@ -1057,7 +1057,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                       .assignmentResponse
                                                                       ?.jsonBody ??
                                                                   ''))!
-                                                          .assignmentResponseDTOList
+                                                          .assignmentQuestionResponseDTOList
                                                           .isNotEmpty) {
                                                         // Correct Answer
                                                         await showDialog(
@@ -1154,7 +1154,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                         .assignmentResponse
                                                                         ?.jsonBody ??
                                                                     ''))!
-                                                            .assignmentResponseDTOList
+                                                            .assignmentQuestionResponseDTOList
                                                             .toList()
                                                             .cast<
                                                                 AssignmentResponseDTOStruct>();
@@ -1184,7 +1184,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                           .responseQuestionList
                                                                           ?.jsonBody ??
                                                                       ''))
-                                                              ?.assignmentResponseDTOList
+                                                              ?.assignmentQuestionResponseDTOList
                                                               .elementAtOrNull(
                                                                   (_model.divisionSelectedQn!) -
                                                                       1))

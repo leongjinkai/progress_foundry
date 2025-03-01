@@ -1,8 +1,8 @@
 export '/backend/schema/util/schema_util.dart';
 
 export 'addition_struct.dart';
-export 'addition_object_struct.dart';
-export 'addition_steps_struct.dart';
+export 'additional_detail_object_struct.dart';
+export 'math_step_struct.dart';
 export 'assignment_struct.dart';
 export 'assignment_response_d_t_o_struct.dart';
 export 'division_object_struct.dart';

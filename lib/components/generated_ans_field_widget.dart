@@ -80,7 +80,7 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
                 FFAppState().updateAnsListAtIndex(
                   widget.idx!,
                   (_) => _model.ansFieldTextController.text,
-                );
+                ); 
               },
             ),
             autofocus: true,

@@ -5,8 +5,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class AdditionStepsStruct extends BaseStruct {
-  AdditionStepsStruct({
+class MathStepStruct extends BaseStruct {
+  MathStepStruct({
     int? digit1,
     int? digit2,
     int? currSum,
@@ -52,16 +52,16 @@ class AdditionStepsStruct extends BaseStruct {
 
   bool hasCarry() => _carry != null;
 
-  static AdditionStepsStruct fromMap(Map<String, dynamic> data) =>
-      AdditionStepsStruct(
+  static MathStepStruct fromMap(Map<String, dynamic> data) =>
+      MathStepStruct(
         digit1: castToType<int>(data['digit1']),
         digit2: castToType<int>(data['digit2']),
         currSum: castToType<int>(data['currSum']),
         carry: castToType<int>(data['carry']),
       );
 
-  static AdditionStepsStruct? maybeFromMap(dynamic data) => data is Map
-      ? AdditionStepsStruct.fromMap(data.cast<String, dynamic>())
+  static MathStepStruct? maybeFromMap(dynamic data) => data is Map
+      ? MathStepStruct.fromMap(data.cast<String, dynamic>())
       : null;
 
   Map<String, dynamic> toMap() => {
@@ -91,8 +91,8 @@ class AdditionStepsStruct extends BaseStruct {
         ),
       }.withoutNulls;
 
-  static AdditionStepsStruct fromSerializableMap(Map<String, dynamic> data) =>
-      AdditionStepsStruct(
+  static MathStepStruct fromSerializableMap(Map<String, dynamic> data) =>
+      MathStepStruct(
         digit1: deserializeParam(
           data['digit1'],
           ParamType.int,
@@ -116,11 +116,11 @@ class AdditionStepsStruct extends BaseStruct {
       );
 
   @override
-  String toString() => 'AdditionStepsStruct(${toMap()})';
+  String toString() => 'MathStepStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is AdditionStepsStruct &&
+    return other is MathStepStruct &&
         digit1 == other.digit1 &&
         digit2 == other.digit2 &&
         currSum == other.currSum &&
@@ -132,13 +132,13 @@ class AdditionStepsStruct extends BaseStruct {
       const ListEquality().hash([digit1, digit2, currSum, carry]);
 }
 
-AdditionStepsStruct createAdditionStepsStruct({
+MathStepStruct createMathStepStruct({
   int? digit1,
   int? digit2,
   int? currSum,
   int? carry,
 }) =>
-    AdditionStepsStruct(
+    MathStepStruct(
       digit1: digit1,
       digit2: digit2,
       currSum: currSum,

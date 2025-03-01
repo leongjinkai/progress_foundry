@@ -48,12 +48,12 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
 
       if (StudentAssignmentStruct.maybeFromMap(
               (_model.responseQuestionList?.jsonBody ?? ''))!
-          .assignmentResponseDTOList
+          .assignmentQuestionResponseDTOList
           .isNotEmpty) {
         // New Set Selected QN Detail
         FFAppState().newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentResponseDTOList
+            .assignmentQuestionResponseDTOList
             .firstOrNull!
             .questionResponseDTO;
         safeSetState(() {});
@@ -62,7 +62,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
         safeSetState(() {});
         FFAppState().newQuestionList = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentResponseDTOList
+            .assignmentQuestionResponseDTOList
             .toList()
             .cast<AssignmentResponseDTOStruct>();
         safeSetState(() {});
@@ -799,7 +799,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                               .responseQuestionList
                                                                               ?.jsonBody ??
                                                                           ''))!
-                                                                      .assignmentResponseDTOList
+                                                                      .assignmentQuestionResponseDTOList
                                                                       .length +
                                                                   1))
                                                             Padding(
@@ -850,7 +850,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                               .assignmentResponse
                                                                               ?.jsonBody ??
                                                                           ''))!
-                                                                      .assignmentResponseDTOList
+                                                                      .assignmentQuestionResponseDTOList
                                                                       .where((e) =>
                                                                           e.questionResponseDTO
                                                                               .id ==
@@ -949,7 +949,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     FFAppState()
                                                                         .newQuestionList = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
                                                                             ''))!
-                                                                        .assignmentResponseDTOList
+                                                                        .assignmentQuestionResponseDTOList
                                                                         .toList()
                                                                         .cast<
                                                                             AssignmentResponseDTOStruct>();

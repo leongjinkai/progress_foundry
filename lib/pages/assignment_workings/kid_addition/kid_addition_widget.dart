@@ -53,12 +53,12 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
 
       if (StudentAssignmentStruct.maybeFromMap(
               (_model.responseQuestionList?.jsonBody ?? ''))!
-          .assignmentResponseDTOList
+          .assignmentQuestionResponseDTOList
           .isNotEmpty) {
         // New Set Selected QN Detail
         FFAppState().newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentResponseDTOList
+            .assignmentQuestionResponseDTOList
             .firstOrNull!
             .questionResponseDTO;
         safeSetState(() {});
@@ -67,7 +67,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
         safeSetState(() {});
         FFAppState().newQuestionList = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentResponseDTOList
+            .assignmentQuestionResponseDTOList
             .toList()
             .cast<AssignmentResponseDTOStruct>();
         safeSetState(() {});
@@ -863,7 +863,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                         .selectedQuestion <
                                                                     (StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
                                                                                 ''))!
-                                                                            .assignmentResponseDTOList
+                                                                            .assignmentQuestionResponseDTOList
                                                                             .length +
                                                                         1))
                                                                   Padding(
@@ -898,24 +898,19 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                               .studentId,
                                                                           assignmentId:
                                                                               widget.assignmentId,
-                                                                          additionalDetailsJson: <String,
-                                                                              int?>{
-                                                                            'digit1':
-                                                                                0,
-                                                                            'digit2':
-                                                                                0,
-                                                                            'currSum':
-                                                                                0,
-                                                                            'carry':
-                                                                                0,
-                                                                          },
+                                                                          additionalDetailsJson:
+                                                                          [AdditionalDetailObjectStruct(
+                                                                            mathOperation: "Addition",
+                                                                            mathSteps: [MathStepStruct(digit1: 0, digit2: 0, carry: 0, currSum: 0)]
+                                                                          ).toMap()],
+                                                                          authToken: currentJwtToken,
                                                                         );
 
                                                                         shouldSetState =
                                                                             true;
                                                                         if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
                                                                                 ''))!
-                                                                            .assignmentResponseDTOList
+                                                                            .assignmentQuestionResponseDTOList
                                                                             .where((e) =>
                                                                                 e.questionResponseDTO.id ==
                                                                                 FFAppState().newSelectedQnDetail.id)
@@ -999,7 +994,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                           FFAppState()
                                                                               .newQuestionList = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
                                                                                   ''))!
-                                                                              .assignmentResponseDTOList
+                                                                              .assignmentQuestionResponseDTOList
                                                                               .toList()
                                                                               .cast<AssignmentResponseDTOStruct>();
                                                                           safeSetState(
@@ -1029,7 +1024,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                         FFAppState()
                                                                             .newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
                                                                                 ''))!
-                                                                            .assignmentResponseDTOList
+                                                                            .assignmentQuestionResponseDTOList
                                                                             .elementAtOrNull(FFAppState().selectedQuestion -
                                                                                 1)!
                                                                             .questionResponseDTO;

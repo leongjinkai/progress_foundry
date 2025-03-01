@@ -17,7 +17,7 @@ class StudentAssignmentStruct extends BaseStruct {
     String? questionLevel,
     String? questionSubLevel,
     String? questionType,
-    List<AssignmentResponseDTOStruct>? assignmentResponseDTOList,
+    List<AssignmentResponseDTOStruct>? assignmentQuestionResponseDTOList,
   })  : _id = id,
         _assignmentName = assignmentName,
         _studentId = studentId,
@@ -29,7 +29,7 @@ class StudentAssignmentStruct extends BaseStruct {
         _questionLevel = questionLevel,
         _questionSubLevel = questionSubLevel,
         _questionType = questionType,
-        _assignmentResponseDTOList = assignmentResponseDTOList;
+        _assignmentQuestionResponseDTOList = assignmentQuestionResponseDTOList;
 
   // "id" field.
   String? _id;
@@ -111,19 +111,19 @@ class StudentAssignmentStruct extends BaseStruct {
 
   bool hasQuestionType() => _questionType != null;
 
-  // "assignmentResponseDTOList" field.
-  List<AssignmentResponseDTOStruct>? _assignmentResponseDTOList;
-  List<AssignmentResponseDTOStruct> get assignmentResponseDTOList =>
-      _assignmentResponseDTOList ?? const [];
-  set assignmentResponseDTOList(List<AssignmentResponseDTOStruct>? val) =>
-      _assignmentResponseDTOList = val;
+  // "assignmentQuestionResponseDTOList" field.
+  List<AssignmentResponseDTOStruct>? _assignmentQuestionResponseDTOList;
+  List<AssignmentResponseDTOStruct> get assignmentQuestionResponseDTOList =>
+      _assignmentQuestionResponseDTOList ?? const [];
+  set assignmentQuestionResponseDTOList(List<AssignmentResponseDTOStruct>? val) =>
+      _assignmentQuestionResponseDTOList = val;
 
   void updateAssignmentResponseDTOList(
       Function(List<AssignmentResponseDTOStruct>) updateFn) {
-    updateFn(_assignmentResponseDTOList ??= []);
+    updateFn(_assignmentQuestionResponseDTOList ??= []);
   }
 
-  bool hasAssignmentResponseDTOList() => _assignmentResponseDTOList != null;
+  bool hasAssignmentQuestionResponseDTOList() => _assignmentQuestionResponseDTOList != null;
 
   static StudentAssignmentStruct fromMap(Map<String, dynamic> data) =>
       StudentAssignmentStruct(
@@ -138,8 +138,8 @@ class StudentAssignmentStruct extends BaseStruct {
         questionLevel: data['questionLevel'] as String?,
         questionSubLevel: data['questionSubLevel'] as String?,
         questionType: data['questionType'] as String?,
-        assignmentResponseDTOList: getStructList(
-          data['assignmentResponseDTOList'],
+        assignmentQuestionResponseDTOList: getStructList(
+          data['assignmentQuestionResponseDTOList'],
           AssignmentResponseDTOStruct.fromMap,
         ),
       );
@@ -160,8 +160,8 @@ class StudentAssignmentStruct extends BaseStruct {
         'questionLevel': _questionLevel,
         'questionSubLevel': _questionSubLevel,
         'questionType': _questionType,
-        'assignmentResponseDTOList':
-            _assignmentResponseDTOList?.map((e) => e.toMap()).toList(),
+        'assignmentQuestionResponseDTOList':
+            _assignmentQuestionResponseDTOList?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -211,7 +211,7 @@ class StudentAssignmentStruct extends BaseStruct {
           ParamType.String,
         ),
         'assignmentResponseDTOList': serializeParam(
-          _assignmentResponseDTOList,
+          _assignmentQuestionResponseDTOList,
           ParamType.DataStruct,
           isList: true,
         ),
@@ -275,7 +275,7 @@ class StudentAssignmentStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        assignmentResponseDTOList:
+        assignmentQuestionResponseDTOList:
             deserializeStructParam<AssignmentResponseDTOStruct>(
           data['assignmentResponseDTOList'],
           ParamType.DataStruct,
@@ -303,7 +303,7 @@ class StudentAssignmentStruct extends BaseStruct {
         questionSubLevel == other.questionSubLevel &&
         questionType == other.questionType &&
         listEquality.equals(
-            assignmentResponseDTOList, other.assignmentResponseDTOList);
+            assignmentQuestionResponseDTOList, other.assignmentQuestionResponseDTOList);
   }
 
   @override
@@ -319,7 +319,7 @@ class StudentAssignmentStruct extends BaseStruct {
         questionLevel,
         questionSubLevel,
         questionType,
-        assignmentResponseDTOList
+        assignmentQuestionResponseDTOList
       ]);
 }
 

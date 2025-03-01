@@ -27,7 +27,7 @@ RUN mkdir /app/
 COPY . /app/
 WORKDIR /app/
 
-RUN flutter build web --dart-define-from-file=development.env
+RUN flutter build web --release --source-maps --dart-define-from-file=development.env
 
 # EXPOSE <EXPOSE PORT THAT YOU WANT>
 EXPOSE 9000
