@@ -1,3 +1,5 @@
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
+
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -33,6 +35,7 @@ class KidAdditionWidget extends StatefulWidget {
 
 class _KidAdditionWidgetState extends State<KidAdditionWidget> {
   late KidAdditionModel _model;
+  bool showFeedback = false;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -961,6 +964,9 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             },
                                                                           );
                                                                         }
+                                                                        setState(() {
+                                                                          showFeedback = true;
+                                                                        });
 
                                                                         if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.completionRate ==
                                                                             1.0) {
@@ -1105,18 +1111,49 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                     ),
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(1.12, -0.67),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Stand_up.gif',
-                                          width: 373.0,
-                                          height: 373.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                                          const AlignmentDirectional(1.12, -0.47),
+                                      child: 
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/Stand_up.gif',
+                                              width: 373.0,
+                                              height: 373.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                     ),
+                                    Builder(
+                                      builder: (context) {
+                                        if (showFeedback) {
+                                          return Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.72, -0.37),
+                                          child: 
+                                            SizedBox(
+                                              width: 300,
+                                              height: 300,
+                                              child: BubbleSpecialThree(
+                                                text: 'You got the question wrong, maybe you can try considering inputting a different number for the answer or look at it from a different angle.',
+                                                color: const Color(0xFFE8E8EE),
+                                                tail: true,
+                                                textStyle:  FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: const Color.fromARGB(255, 0, 0, 0),
+                                                    fontSize: 14.0,
+                                                    letterSpacing: 0.0,
+                                                    lineHeight: 1.5,
+                                                  )
+                                              ),
+                                            ),
+                                        );
+                                        } else {
+                                          return Container();
+                                        }
+                                    }),
                                   ],
                                 ),
                               ),
