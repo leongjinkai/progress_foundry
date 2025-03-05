@@ -1034,7 +1034,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                               .call(
                                                         questionId: FFAppState()
                                                             .newSelectedQnDetail
-                                                            .id,
+                                                            .id.toString(),
                                                         answer: (List<String>
                                                             ansList) {
                                                           return ansList

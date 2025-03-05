@@ -173,7 +173,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                       return wrapWithModel(
                                         model: _model.questionBubbleNewModels
                                             .getModel(
-                                          questionItem.questionResponseDTO.id,
+                                          questionItem.questionResponseDTO.id.toString(),
                                           questionIndex,
                                         ),
                                         updateCallback: () =>
@@ -606,7 +606,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                                                                                   child: Text(
                                                                                     valueOrDefault<String>(
-                                                                                      functions.getOperatorFromTopic(functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!),
+                                                                                      functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
                                                                                       '?',
                                                                                     ),
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -891,7 +891,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             .call(
                                                                           questionId: FFAppState()
                                                                               .newSelectedQnDetail
-                                                                              .id,
+                                                                              .id.toString(),
                                                                           answer: (List<String>
                                                                               ansList) {
                                                                             return ansList.join().replaceAll("a",

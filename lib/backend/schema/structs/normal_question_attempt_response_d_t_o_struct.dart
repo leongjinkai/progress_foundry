@@ -7,9 +7,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
   NormalQuestionAttemptResponseDTOStruct({
-    String? id,
+    int? id,
     String? studentId,
-    String? normalQuestionId,
+    int? normalQuestionId,
     String? submittedAnswer,
     bool? isCorrect,
     String? createdAt,
@@ -21,9 +21,9 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
         _createdAt = createdAt;
 
   // "id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
   bool hasId() => _id != null;
 
@@ -35,9 +35,9 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
   bool hasStudentId() => _studentId != null;
 
   // "normalQuestionId" field.
-  String? _normalQuestionId;
-  String get normalQuestionId => _normalQuestionId ?? '';
-  set normalQuestionId(String? val) => _normalQuestionId = val;
+  int? _normalQuestionId;
+  int get normalQuestionId => _normalQuestionId ?? 0;
+  set normalQuestionId(int? val) => _normalQuestionId = val;
 
   bool hasNormalQuestionId() => _normalQuestionId != null;
 
@@ -65,9 +65,9 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
   static NormalQuestionAttemptResponseDTOStruct fromMap(
           Map<String, dynamic> data) =>
       NormalQuestionAttemptResponseDTOStruct(
-        id: data['id'] as String?,
+        id: data['id'] as int?,
         studentId: data['studentId'] as String?,
-        normalQuestionId: data['normalQuestionId'] as String?,
+        normalQuestionId: data['normalQuestionId'] as int?,
         submittedAnswer: data['submittedAnswer'] as String?,
         isCorrect: data['isCorrect'] as bool?,
         createdAt: data['createdAt'] as String?,
@@ -92,7 +92,7 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'id': serializeParam(
           _id,
-          ParamType.String,
+          ParamType.int,
         ),
         'studentId': serializeParam(
           _studentId,
@@ -100,7 +100,7 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
         ),
         'normalQuestionId': serializeParam(
           _normalQuestionId,
-          ParamType.String,
+          ParamType.int,
         ),
         'submittedAnswer': serializeParam(
           _submittedAnswer,
@@ -121,7 +121,7 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
       NormalQuestionAttemptResponseDTOStruct(
         id: deserializeParam(
           data['id'],
-          ParamType.String,
+          ParamType.int,
           false,
         ),
         studentId: deserializeParam(
@@ -131,7 +131,7 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
         ),
         normalQuestionId: deserializeParam(
           data['normalQuestionId'],
-          ParamType.String,
+          ParamType.int,
           false,
         ),
         submittedAnswer: deserializeParam(
@@ -172,9 +172,9 @@ class NormalQuestionAttemptResponseDTOStruct extends BaseStruct {
 
 NormalQuestionAttemptResponseDTOStruct
     createNormalQuestionAttemptResponseDTOStruct({
-  String? id,
+  int? id,
   String? studentId,
-  String? normalQuestionId,
+  int? normalQuestionId,
   String? submittedAnswer,
   bool? isCorrect,
   String? createdAt,

@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class StudentAssignmentStruct extends BaseStruct {
   StudentAssignmentStruct({
-    String? id,
+    int? id,
     String? assignmentName,
     String? studentId,
     double? completionRate,
@@ -32,9 +32,9 @@ class StudentAssignmentStruct extends BaseStruct {
         _assignmentQuestionResponseDTOList = assignmentQuestionResponseDTOList;
 
   // "id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
   bool hasId() => _id != null;
 
@@ -127,7 +127,7 @@ class StudentAssignmentStruct extends BaseStruct {
 
   static StudentAssignmentStruct fromMap(Map<String, dynamic> data) =>
       StudentAssignmentStruct(
-        id: data['id'] as String?,
+        id: data['id'] as int?,
         assignmentName: data['assignmentName'] as String?,
         studentId: data['studentId'] as String?,
         completionRate: castToType<double>(data['completionRate']),
@@ -324,7 +324,7 @@ class StudentAssignmentStruct extends BaseStruct {
 }
 
 StudentAssignmentStruct createStudentAssignmentStruct({
-  String? id,
+  int? id,
   String? assignmentName,
   String? studentId,
   double? completionRate,

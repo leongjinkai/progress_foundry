@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class AdditionStruct extends BaseStruct {
   AdditionStruct({
-    String? id,
+    int? id,
     String? assignmentName,
     String? studentId,
     String? createdAt,
@@ -27,9 +27,9 @@ class AdditionStruct extends BaseStruct {
         _questionSubLevel = questionSubLevel;
 
   // "id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
   bool hasId() => _id != null;
 
@@ -90,7 +90,7 @@ class AdditionStruct extends BaseStruct {
   bool hasQuestionSubLevel() => _questionSubLevel != null;
 
   static AdditionStruct fromMap(Map<String, dynamic> data) => AdditionStruct(
-        id: data['id'] as String?,
+        id: data['id'] as int?,
         assignmentName: data['assignmentName'] as String?,
         studentId: data['studentId'] as String?,
         createdAt: data['createdAt'] as String?,
@@ -120,7 +120,7 @@ class AdditionStruct extends BaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'id': serializeParam(
           _id,
-          ParamType.String,
+          ParamType.int,
         ),
         'assignmentName': serializeParam(
           _assignmentName,
@@ -160,7 +160,7 @@ class AdditionStruct extends BaseStruct {
       AdditionStruct(
         id: deserializeParam(
           data['id'],
-          ParamType.String,
+          ParamType.int,
           false,
         ),
         assignmentName: deserializeParam(
@@ -237,7 +237,7 @@ class AdditionStruct extends BaseStruct {
 }
 
 AdditionStruct createAdditionStruct({
-  String? id,
+  int? id,
   String? assignmentName,
   String? studentId,
   String? createdAt,

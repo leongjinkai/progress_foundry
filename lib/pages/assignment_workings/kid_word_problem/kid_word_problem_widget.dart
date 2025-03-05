@@ -160,7 +160,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                       return wrapWithModel(
                                         model: _model.questionBubbleNewModels
                                             .getModel(
-                                          questionItem.questionResponseDTO.id,
+                                          questionItem.questionResponseDTO.id.toString(),
                                           questionIndex,
                                         ),
                                         updateCallback: () =>
@@ -824,7 +824,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     questionId:
                                                                         FFAppState()
                                                                             .newSelectedQnDetail
-                                                                            .id,
+                                                                            .id.toString(),
                                                                     answer: (List<
                                                                             String>
                                                                         ansList) {

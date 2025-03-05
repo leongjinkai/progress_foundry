@@ -30,6 +30,7 @@ class _LandingWidgetState extends State<LandingWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      debugDumpRenderTree();
       actions.handleAuthSessionUrlResponse();
     });
 

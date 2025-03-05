@@ -218,7 +218,7 @@ class _KidsHomePageAssignmentWidgetState
                                     return wrapWithModel(
                                       model: _model.activeAssignmentCardModels
                                           .getModel(
-                                        assignmentItem.id,
+                                        assignmentItem.id.toString(),
                                         assignmentIndex,
                                       ),
                                       updateCallback: () => safeSetState(() {}),
@@ -233,7 +233,7 @@ class _KidsHomePageAssignmentWidgetState
                                             assignmentItem.questionLevel,
                                         completionRateParam:
                                             assignmentItem.completionRate,
-                                        assignmentId: assignmentItem.id,
+                                        assignmentId: assignmentItem.id.toString(),
                                         qnTopic: assignmentItem.questionTopic,
                                       ),
                                     );
