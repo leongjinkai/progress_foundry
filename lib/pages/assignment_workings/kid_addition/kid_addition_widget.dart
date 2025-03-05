@@ -113,337 +113,656 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
           child: Stack(
             children: [
               if (!FFAppState().isLoading)
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      constraints: BoxConstraints(
-                        minWidth: MediaQuery.sizeOf(context).width * 1.0,
-                        maxWidth: MediaQuery.sizeOf(context).width * 1.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 256.0,
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            constraints: const BoxConstraints(
-                              minWidth: 256.0,
-                            ),
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              border: Border.all(
-                                width: 1.0,
-                              ),
-                            ),
-                            child: Visibility(
-                              visible: !FFAppState().isLoading,
-                              child: Builder(
-                                builder: (context) {
-                                  final question = FFAppState()
-                                      .newQuestionList
-                                      .map((e) => e)
-                                      .toList();
-                                  if (question.isEmpty) {
-                                    return SvgPicture.asset(
-                                      'assets/images/setting_icon.svg',
-                                    );
-                                  }
-
-                                  return ListView.separated(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      0,
-                                      104.0,
-                                      0,
-                                      0,
-                                    ),
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: question.length,
-                                    separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 5.0),
-                                    itemBuilder: (context, questionIndex) {
-                                      final questionItem =
-                                          question[questionIndex];
-                                      return wrapWithModel(
-                                        model: _model.questionBubbleNewModels
-                                            .getModel(
-                                          questionItem.questionResponseDTO.id.toString(),
-                                          questionIndex,
-                                        ),
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: QuestionBubbleNewWidget(
-                                          key: Key(
-                                            'Keyvfx_${questionItem.questionResponseDTO.id}',
-                                          ),
-                                          questionNumber: questionIndex + 1,
-                                          questionAttempt: questionItem,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.8,
+                Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 700
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        constraints: BoxConstraints(
+                          minWidth: MediaQuery.sizeOf(context).width * 1.0,
+                          maxWidth: MediaQuery.sizeOf(context).width * 1.0,
+                          minHeight: 800
+                        ),
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 256.0,
                               height: MediaQuery.sizeOf(context).height * 1.0,
+                              constraints: const BoxConstraints(
+                                minWidth: 256.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
+                                border: Border.all(
+                                  width: 1.0,
+                                ),
                               ),
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
+                              child: Visibility(
+                                visible: !FFAppState().isLoading,
+                                child: Builder(
+                                  builder: (context) {
+                                    final question = FFAppState()
+                                        .newQuestionList
+                                        .map((e) => e)
+                                        .toList();
+                                    if (question.isEmpty) {
+                                      return SvgPicture.asset(
+                                        'assets/images/setting_icon.svg',
+                                      );
+                                    }
+                  
+                                    return ListView.separated(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        0,
+                                        104.0,
+                                        0,
+                                        0,
+                                      ),
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: question.length,
+                                      separatorBuilder: (_, __) =>
+                                          const SizedBox(height: 5.0),
+                                      itemBuilder: (context, questionIndex) {
+                                        final questionItem =
+                                            question[questionIndex];
+                                        return wrapWithModel(
+                                          model: _model.questionBubbleNewModels
+                                              .getModel(
+                                            questionItem.questionResponseDTO.id.toString(),
+                                            questionIndex,
+                                          ),
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: QuestionBubbleNewWidget(
+                                            key: Key(
+                                              'Keyvfx_${questionItem.questionResponseDTO.id}',
+                                            ),
+                                            questionNumber: questionIndex + 1,
+                                            questionAttempt: questionItem,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.8,
                                 height: MediaQuery.sizeOf(context).height * 1.0,
-                                child: Stack(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    if (FFAppState().bgImg == 'bgOne')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_one.png',
-                                            ).image,
-                                          ),
-                                        ),
-                                      ),
-                                    if (FFAppState().bgImg == 'bgTwo')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_two.png',
-                                            ).image,
-                                          ),
-                                        ),
-                                      ),
-                                    if (FFAppState().bgImg == 'bgThree')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_three.png',
-                                            ).image,
-                                          ),
-                                        ),
-                                      ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Adding to 1000',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                color: const Color(0xFF486284),
-                                                fontSize: 40.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                                lineHeight: 1.5,
-                                              ),
-                                        ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: MediaQuery.sizeOf(context).height * 1.0,
+                                  child: Stack(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    children: [
+                                      if (FFAppState().bgImg == 'bgOne')
                                         Container(
-                                          width: 600.0,
-                                          height: 762.0,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Color(0xFFACCDFF),
-                                                offset: Offset(
-                                                  10.0,
-                                                  -10.0,
-                                                ),
-                                              )
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                            border: Border.all(
-                                              color: const Color(0xFFACCDFF),
-                                              width: 1.0,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_one.png',
+                                              ).image,
                                             ),
                                           ),
-                                          child: Visibility(
-                                            visible: !FFAppState().isLoading,
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      38.0, 38.0, 38.0, 38.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    2.0),
-                                                        child: Text(
-                                                          'Timer',
+                                        ),
+                                      if (FFAppState().bgImg == 'bgTwo')
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_two.png',
+                                              ).image,
+                                            ),
+                                          ),
+                                        ),
+                                      if (FFAppState().bgImg == 'bgThree')
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_three.png',
+                                              ).image,
+                                            ),
+                                          ),
+                                        ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Adding to 1000',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: const Color(0xFF486284),
+                                                  fontSize: 40.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  lineHeight: 1.5,
+                                                ),
+                                          ),
+                                          Container(
+                                            width: 600.0,
+                                            height: 662.0,
+                                            decoration: BoxDecoration(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Color(0xFFACCDFF),
+                                                  offset: Offset(
+                                                    10.0,
+                                                    -10.0,
+                                                  ),
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              border: Border.all(
+                                                color: const Color(0xFFACCDFF),
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Visibility(
+                                              visible: !FFAppState().isLoading,
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        38.0, 38.0, 38.0, 38.0),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.end,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      2.0),
+                                                          child: Text(
+                                                            'Timer',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'DM Sans',
+                                                                  fontSize: 16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  lineHeight: 1.5,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        FlutterFlowTimer(
+                                                          initialTime: _model
+                                                              .timerInitialTimeMs,
+                                                          getDisplayTime: (value) =>
+                                                              StopWatchTimer
+                                                                  .getDisplayTime(
+                                                            value,
+                                                            hours: false,
+                                                            milliSecond: false,
+                                                          ),
+                                                          controller: _model
+                                                              .timerController,
+                                                          updateStateInterval:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      1000),
+                                                          onChanged: (value,
+                                                              displayTime,
+                                                              shouldUpdate) {
+                                                            _model.timerMilliseconds =
+                                                                value;
+                                                            _model.timerValue =
+                                                                displayTime;
+                                                            if (shouldUpdate) {
+                                                              safeSetState(() {});
+                                                            }
+                                                          },
+                                                          textAlign:
+                                                              TextAlign.start,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyMedium
+                                                              .headlineSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'DM Sans',
-                                                                fontSize: 16.0,
+                                                                    'Poppins',
+                                                                fontSize: 23.0,
                                                                 letterSpacing:
                                                                     0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
                                                                 lineHeight: 1.5,
                                                               ),
                                                         ),
-                                                      ),
-                                                      FlutterFlowTimer(
-                                                        initialTime: _model
-                                                            .timerInitialTimeMs,
-                                                        getDisplayTime: (value) =>
-                                                            StopWatchTimer
-                                                                .getDisplayTime(
-                                                          value,
-                                                          hours: false,
-                                                          milliSecond: false,
-                                                        ),
-                                                        controller: _model
-                                                            .timerController,
-                                                        updateStateInterval:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    1000),
-                                                        onChanged: (value,
-                                                            displayTime,
-                                                            shouldUpdate) {
-                                                          _model.timerMilliseconds =
-                                                              value;
-                                                          _model.timerValue =
-                                                              displayTime;
-                                                          if (shouldUpdate) {
-                                                            safeSetState(() {});
-                                                          }
-                                                        },
+                                                      ].divide(
+                                                          const SizedBox(width: 5.0)),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(0.0, 0.0,
+                                                                  0.0, 62.0),
+                                                      child: Text(
+                                                        'Question ${FFAppState().selectedQuestion.toString()}',
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: FlutterFlowTheme
                                                                 .of(context)
-                                                            .headlineSmall
+                                                            .bodyMedium
                                                             .override(
                                                               fontFamily:
                                                                   'Poppins',
-                                                              fontSize: 23.0,
-                                                              letterSpacing:
-                                                                  0.0,
+                                                              fontSize: 33.0,
+                                                              letterSpacing: 0.0,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                                  FontWeight.bold,
                                                               lineHeight: 1.5,
                                                             ),
                                                       ),
-                                                    ].divide(
-                                                        const SizedBox(width: 5.0)),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 62.0),
-                                                    child: Text(
-                                                      'Question ${FFAppState().selectedQuestion.toString()}',
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            fontSize: 33.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            lineHeight: 1.5,
-                                                          ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
-                                                          1.0,
-                                                      height: 100.0,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    115.0,
-                                                                    0.0,
-                                                                    115.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          95.0),
-                                                              child: Row(
+                                                    Expanded(
+                                                      child: Container(
+                                                        width: MediaQuery.sizeOf(
+                                                                    context)
+                                                                .width *
+                                                            1.0,
+                                                        height: 100.0,
+                                                        decoration: BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      115.0,
+                                                                      0.0,
+                                                                      115.0,
+                                                                      0.0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize.max,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            55.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      FFAppState()
+                                                                          .newSelectedQnDetail
+                                                                          .question,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'DM Sans',
+                                                                            fontSize:
+                                                                                33.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                    Container(
+                                                                      width: 41.0,
+                                                                      height:
+                                                                          41.0,
+                                                                      decoration:
+                                                                          const BoxDecoration(),
+                                                                      child:
+                                                                          Align(
+                                                                        alignment:
+                                                                            const AlignmentDirectional(
+                                                                                0.0,
+                                                                                0.0),
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              41.0,
+                                                                          child:
+                                                                              TextFormField(
+                                                                            controller:
+                                                                                _model.unknownAnswerTextController,
+                                                                            focusNode:
+                                                                                _model.unknownAnswerFocusNode,
+                                                                            autofocus:
+                                                                                true,
+                                                                            readOnly:
+                                                                                true,
+                                                                            obscureText:
+                                                                                false,
+                                                                            decoration:
+                                                                                InputDecoration(
+                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                    fontFamily: 'DM Sans',
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
+                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                    fontFamily: 'DM Sans',
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
+                                                                              enabledBorder:
+                                                                                  OutlineInputBorder(
+                                                                                borderSide: BorderSide(
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  width: 0.5,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(0.0),
+                                                                              ),
+                                                                              focusedBorder:
+                                                                                  OutlineInputBorder(
+                                                                                borderSide: BorderSide(
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  width: 0.5,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(0.0),
+                                                                              ),
+                                                                              errorBorder:
+                                                                                  OutlineInputBorder(
+                                                                                borderSide: BorderSide(
+                                                                                  color: FlutterFlowTheme.of(context).error,
+                                                                                  width: 0.5,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(0.0),
+                                                                              ),
+                                                                              focusedErrorBorder:
+                                                                                  OutlineInputBorder(
+                                                                                borderSide: BorderSide(
+                                                                                  color: FlutterFlowTheme.of(context).error,
+                                                                                  width: 0.5,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(0.0),
+                                                                              ),
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context)
+                                                                                .bodyMedium
+                                                                                .override(
+                                                                                  fontFamily: 'DM Sans',
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            validator: _model
+                                                                                .unknownAnswerTextControllerValidator
+                                                                                .asValidator(context),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ].divide(const SizedBox(
+                                                                      width:
+                                                                          11.0)),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Container(
+                                                                  height: 100.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                                  ),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize
+                                                                                .max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.sizeOf(context).width * 1.0,
+                                                                            height:
+                                                                                145.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color:
+                                                                                  FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            ),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize:
+                                                                                  MainAxisSize.max,
+                                                                              mainAxisAlignment:
+                                                                                  MainAxisAlignment.end,
+                                                                              crossAxisAlignment:
+                                                                                  CrossAxisAlignment.end,
+                                                                              children:
+                                                                                  [
+                                                                                Align(
+                                                                                  alignment: const AlignmentDirectional(0.0, 1.4),
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                                                                                    child: Text(
+                                                                                      valueOrDefault<String>(
+                                                                                        functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
+                                                                                        '?',
+                                                                                      ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'DM Sans',
+                                                                                            fontSize: 32.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            lineHeight: 1.5,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                                Flexible(
+                                                                                  child: Container(
+                                                                                    width: MediaQuery.sizeOf(context).width * 1.0,
+                                                                                    height: MediaQuery.sizeOf(context).height * 1.0,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    ),
+                                                                                    child: Column(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
+                                                                                          child: Builder(
+                                                                                            builder: (context) {
+                                                                                              final numCarryOver = functions.getCarryOverNumList(FFAppState().newSelectedQnDetail.questionLevel).map((e) => e).toList();
+                  
+                                                                                              return Row(
+                                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                children: List.generate(numCarryOver.length, (numCarryOverIndex) {
+                                                                                                  final numCarryOverItem = numCarryOver[numCarryOverIndex];
+                                                                                                  return GeneratedCOFieldWidget(
+                                                                                                    key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
+                                                                                                    inputChar: '?',
+                                                                                                    ansId: '?',
+                                                                                                  );
+                                                                                                }).divide(const SizedBox(width: 8.0)),
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                        Builder(
+                                                                                          builder: (context) {
+                                                                                            final firstNumChar = functions.getFirstNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
+                                                                                            if (firstNumChar.isEmpty) {
+                                                                                              return SvgPicture.asset(
+                                                                                                'assets/images/assignment_icon.svg',
+                                                                                              );
+                                                                                            }
+                  
+                                                                                            return Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.end,
+                                                                                              children: List.generate(firstNumChar.length, (firstNumCharIndex) {
+                                                                                                final firstNumCharItem = firstNumChar[firstNumCharIndex];
+                                                                                                return GeneratedQnFieldWidget(
+                                                                                                  key: Key('Keyqdf_${firstNumCharIndex}_of_${firstNumChar.length}'),
+                                                                                                  inputChar: firstNumCharItem,
+                                                                                                );
+                                                                                              }).divide(const SizedBox(width: 8.0)),
+                                                                                            );
+                                                                                          },
+                                                                                        ),
+                                                                                        Builder(
+                                                                                          builder: (context) {
+                                                                                            final secondNumChar = functions.getSecondNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
+                                                                                            if (secondNumChar.isEmpty) {
+                                                                                              return SvgPicture.asset(
+                                                                                                'assets/images/practice_icon.svg',
+                                                                                              );
+                                                                                            }
+                  
+                                                                                            return Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.end,
+                                                                                              children: List.generate(secondNumChar.length, (secondNumCharIndex) {
+                                                                                                final secondNumCharItem = secondNumChar[secondNumCharIndex];
+                                                                                                return GeneratedQnFieldWidget(
+                                                                                                  key: Key('Keyofe_${secondNumCharIndex}_of_${secondNumChar.length}'),
+                                                                                                  inputChar: secondNumCharItem,
+                                                                                                );
+                                                                                              }).divide(const SizedBox(width: 8.0)),
+                                                                                            );
+                                                                                          },
+                                                                                        ),
+                                                                                      ].divide(const SizedBox(height: 8.0)),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ].divide(const SizedBox(width: 28.0)),
+                                                                            ),
+                                                                          ),
+                                                                          Divider(
+                                                                            thickness:
+                                                                                1.0,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final numAnswers = functions
+                                                                              .getAdditionAnsLength(FFAppState()
+                                                                                  .newSelectedQnDetail
+                                                                                  .questionLevel)
+                                                                              .map((e) =>
+                                                                                  e)
+                                                                              .toList()
+                                                                              .take(4)
+                                                                              .toList();
+                  
+                                                                          return Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.end,
+                                                                            children: List.generate(
+                                                                                numAnswers.length,
+                                                                                (numAnswersIndex) {
+                                                                              final numAnswersItem =
+                                                                                  numAnswers[numAnswersIndex];
+                                                                              return wrapWithModel(
+                                                                                model: _model.generatedAnsFieldModels.getModel(
+                                                                                  numAnswersIndex.toString(),
+                                                                                  numAnswersIndex,
+                                                                                ),
+                                                                                updateCallback: () => safeSetState(() {}),
+                                                                                child: GeneratedAnsFieldWidget(
+                                                                                  key: Key(
+                                                                                    'Keyfh0_${numAnswersIndex.toString()}',
+                                                                                  ),
+                                                                                  inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
+                                                                                  idx: numAnswersIndex,
+                                                                                ),
+                                                                              );
+                                                                            }).divide(
+                                                                                const SizedBox(width: 8.0)),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        height:
+                                                                            17.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
@@ -451,533 +770,43 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                     MainAxisAlignment
                                                                         .center,
                                                                 children: [
-                                                                  Text(
-                                                                    FFAppState()
-                                                                        .newSelectedQnDetail
-                                                                        .question,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'DM Sans',
-                                                                          fontSize:
-                                                                              33.0,
-                                                                          letterSpacing:
+                                                                  if (FFAppState()
+                                                                          .selectedQuestion >
+                                                                      1)
+                                                                    Padding(
+                                                                      padding: const EdgeInsetsDirectional
+                                                                          .fromSTEB(
                                                                               0.0,
-                                                                        ),
-                                                                  ),
-                                                                  Container(
-                                                                    width: 41.0,
-                                                                    height:
-                                                                        41.0,
-                                                                    decoration:
-                                                                        const BoxDecoration(),
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          const AlignmentDirectional(
                                                                               0.0,
-                                                                              0.0),
+                                                                              0.0,
+                                                                              6.0),
                                                                       child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            41.0,
-                                                                        child:
-                                                                            TextFormField(
-                                                                          controller:
-                                                                              _model.unknownAnswerTextController,
-                                                                          focusNode:
-                                                                              _model.unknownAnswerFocusNode,
-                                                                          autofocus:
-                                                                              true,
-                                                                          readOnly:
-                                                                              true,
-                                                                          obscureText:
-                                                                              false,
-                                                                          decoration:
-                                                                              InputDecoration(
-                                                                            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: 'DM Sans',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                            hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: 'DM Sans',
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                            enabledBorder:
-                                                                                OutlineInputBorder(
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                width: 0.5,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(0.0),
-                                                                            ),
-                                                                            focusedBorder:
-                                                                                OutlineInputBorder(
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 0.5,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(0.0),
-                                                                            ),
-                                                                            errorBorder:
-                                                                                OutlineInputBorder(
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).error,
-                                                                                width: 0.5,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(0.0),
-                                                                            ),
-                                                                            focusedErrorBorder:
-                                                                                OutlineInputBorder(
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).error,
-                                                                                width: 0.5,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(0.0),
-                                                                            ),
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'DM Sans',
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          validator: _model
-                                                                              .unknownAnswerTextControllerValidator
-                                                                              .asValidator(context),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ].divide(const SizedBox(
-                                                                    width:
-                                                                        11.0)),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Container(
-                                                                height: 100.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                ),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Container(
-                                                                          width:
-                                                                              MediaQuery.sizeOf(context).width * 1.0,
-                                                                          height:
-                                                                              145.0,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          ),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.end,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.end,
-                                                                            children:
-                                                                                [
-                                                                              Align(
-                                                                                alignment: const AlignmentDirectional(0.0, 1.4),
-                                                                                child: Padding(
-                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                                                                                  child: Text(
-                                                                                    valueOrDefault<String>(
-                                                                                      functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
-                                                                                      '?',
-                                                                                    ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: 'DM Sans',
-                                                                                          fontSize: 32.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          lineHeight: 1.5,
-                                                                                        ),
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                              Flexible(
-                                                                                child: Container(
-                                                                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                                                                  height: MediaQuery.sizeOf(context).height * 1.0,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                  ),
-                                                                                  child: Column(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                                                                    children: [
-                                                                                      Padding(
-                                                                                        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
-                                                                                        child: Builder(
-                                                                                          builder: (context) {
-                                                                                            final numCarryOver = functions.getCarryOverNumList(FFAppState().newSelectedQnDetail.questionLevel).map((e) => e).toList();
-
-                                                                                            return Row(
-                                                                                              mainAxisSize: MainAxisSize.min,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: List.generate(numCarryOver.length, (numCarryOverIndex) {
-                                                                                                final numCarryOverItem = numCarryOver[numCarryOverIndex];
-                                                                                                return GeneratedCOFieldWidget(
-                                                                                                  key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
-                                                                                                  inputChar: '?',
-                                                                                                  ansId: '?',
-                                                                                                );
-                                                                                              }).divide(const SizedBox(width: 8.0)),
-                                                                                            );
-                                                                                          },
-                                                                                        ),
-                                                                                      ),
-                                                                                      Builder(
-                                                                                        builder: (context) {
-                                                                                          final firstNumChar = functions.getFirstNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
-                                                                                          if (firstNumChar.isEmpty) {
-                                                                                            return SvgPicture.asset(
-                                                                                              'assets/images/assignment_icon.svg',
-                                                                                            );
-                                                                                          }
-
-                                                                                          return Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                                                            children: List.generate(firstNumChar.length, (firstNumCharIndex) {
-                                                                                              final firstNumCharItem = firstNumChar[firstNumCharIndex];
-                                                                                              return GeneratedQnFieldWidget(
-                                                                                                key: Key('Keyqdf_${firstNumCharIndex}_of_${firstNumChar.length}'),
-                                                                                                inputChar: firstNumCharItem,
-                                                                                              );
-                                                                                            }).divide(const SizedBox(width: 8.0)),
-                                                                                          );
-                                                                                        },
-                                                                                      ),
-                                                                                      Builder(
-                                                                                        builder: (context) {
-                                                                                          final secondNumChar = functions.getSecondNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
-                                                                                          if (secondNumChar.isEmpty) {
-                                                                                            return SvgPicture.asset(
-                                                                                              'assets/images/practice_icon.svg',
-                                                                                            );
-                                                                                          }
-
-                                                                                          return Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                                                            children: List.generate(secondNumChar.length, (secondNumCharIndex) {
-                                                                                              final secondNumCharItem = secondNumChar[secondNumCharIndex];
-                                                                                              return GeneratedQnFieldWidget(
-                                                                                                key: Key('Keyofe_${secondNumCharIndex}_of_${secondNumChar.length}'),
-                                                                                                inputChar: secondNumCharItem,
-                                                                                              );
-                                                                                            }).divide(const SizedBox(width: 8.0)),
-                                                                                          );
-                                                                                        },
-                                                                                      ),
-                                                                                    ].divide(const SizedBox(height: 8.0)),
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ].divide(const SizedBox(width: 28.0)),
-                                                                          ),
-                                                                        ),
-                                                                        Divider(
-                                                                          thickness:
-                                                                              1.0,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Builder(
-                                                                      builder:
-                                                                          (context) {
-                                                                        final numAnswers = functions
-                                                                            .getAdditionAnsLength(FFAppState()
-                                                                                .newSelectedQnDetail
-                                                                                .questionLevel)
-                                                                            .map((e) =>
-                                                                                e)
-                                                                            .toList()
-                                                                            .take(4)
-                                                                            .toList();
-
-                                                                        return Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.end,
-                                                                          children: List.generate(
-                                                                              numAnswers.length,
-                                                                              (numAnswersIndex) {
-                                                                            final numAnswersItem =
-                                                                                numAnswers[numAnswersIndex];
-                                                                            return wrapWithModel(
-                                                                              model: _model.generatedAnsFieldModels.getModel(
-                                                                                numAnswersIndex.toString(),
-                                                                                numAnswersIndex,
-                                                                              ),
-                                                                              updateCallback: () => safeSetState(() {}),
-                                                                              child: GeneratedAnsFieldWidget(
-                                                                                key: Key(
-                                                                                  'Keyfh0_${numAnswersIndex.toString()}',
-                                                                                ),
-                                                                                inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
-                                                                                idx: numAnswersIndex,
-                                                                              ),
-                                                                            );
-                                                                          }).divide(
-                                                                              const SizedBox(width: 8.0)),
-                                                                        );
-                                                                      },
-                                                                    ),
-                                                                  ].divide(const SizedBox(
-                                                                      height:
-                                                                          17.0)),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                if (FFAppState()
-                                                                        .selectedQuestion >
-                                                                    1)
-                                                                  Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            6.0),
-                                                                    child:
-                                                                        FFButtonWidget(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        // Minus 1 to selectedQn
-                                                                        FFAppState()
-                                                                            .selectedQuestion = FFAppState()
-                                                                                .selectedQuestion +
-                                                                            -1;
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        // Change qn detail
-                                                                        FFAppState().newSelectedQnDetail = FFAppState()
-                                                                            .newQuestionList
-                                                                            .elementAtOrNull(FFAppState().selectedQuestion +
-                                                                                1)!
-                                                                            .questionResponseDTO;
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        // Clear ansList
-                                                                        FFAppState().ansList =
-                                                                            [];
-                                                                        _model.updatePage(
-                                                                            () {});
-                                                                        await Future.delayed(const Duration(
-                                                                            milliseconds:
-                                                                                100));
-                                                                        // Reset Answer Input
-                                                                        FFAppState()
-                                                                            .ansList = [
-                                                                          "",
-                                                                          "",
-                                                                          "",
-                                                                          ""
-                                                                        ].toList().cast<
-                                                                            String>();
-                                                                        FFAppState()
-                                                                            .update(() {});
-                                                                        _model
-                                                                            .timerController
-                                                                            .onResetTimer();
-
-                                                                        _model
-                                                                            .timerController
-                                                                            .onStartTimer();
-                                                                      },
-                                                                      text:
-                                                                          '< Back',
-                                                                      options:
-                                                                          FFButtonOptions(
-                                                                        width:
-                                                                            136.0,
-                                                                        height:
-                                                                            38.0,
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            24.0,
-                                                                            0.0,
-                                                                            24.0,
-                                                                            0.0),
-                                                                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryBackground,
-                                                                        textStyle: FlutterFlowTheme.of(context)
-                                                                            .titleSmall
-                                                                            .override(
-                                                                              fontFamily: 'DM Sans',
-                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                              letterSpacing: 0.0,
-                                                                            ),
-                                                                        elevation:
-                                                                            3.0,
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          width:
-                                                                              1.0,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(8.0),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                if (FFAppState()
-                                                                        .selectedQuestion <
-                                                                    (StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
-                                                                                ''))!
-                                                                            .assignmentQuestionResponseDTOList
-                                                                            .length +
-                                                                        1))
-                                                                  Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            6.0),
-                                                                    child:
-                                                                        FFButtonWidget(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        var shouldSetState =
-                                                                            false;
-
-                                                                        var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split("+").map((element) => element.replaceAll("=", "")).toList();
-
-                                                                        // Call Attempt API
-                                                                        _model.assignmentResponse = await LiveQuestionManagementGroup
-                                                                            .attemptQuestionCall
-                                                                            .call(
-                                                                          questionId: FFAppState()
-                                                                              .newSelectedQnDetail
-                                                                              .id.toString(),
-                                                                          answer: (List<String>
-                                                                              ansList) {
-                                                                            return ansList.join().replaceAll("a",
-                                                                                "");
-                                                                          }(FFAppState()
-                                                                              .ansList
-                                                                              .toList()),
-                                                                          studentId: FFAppState()
-                                                                              .MockStudent
-                                                                              .studentId,
-                                                                          assignmentId:
-                                                                              widget.assignmentId,
-                                                                          additionalDetailsJson:
-                                                                          [AdditionalDetailObjectStruct(
-                                                                            mathOperation: "Addition",
-                                                                            mathSteps: [MathStepStruct(digit1: int.parse(listDigits[0]), digit2: int.parse(listDigits[1]), carry: 0, currSum: int.parse(FFAppState().ansList.join()))]
-                                                                          ).toMap()],
-                                                                          authToken: currentJwtToken,
-                                                                        );
-
-                                                                        shouldSetState =
-                                                                            true;
-                                                                        if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
-                                                                                ''))!
-                                                                            .assignmentQuestionResponseDTOList
-                                                                            .where((e) =>
-                                                                                e.questionResponseDTO.id ==
-                                                                                FFAppState().newSelectedQnDetail.id)
-                                                                            .toList()
-                                                                            .firstOrNull!
-                                                                            .normalQuestionAttemptResponseDTO
-                                                                            .isCorrect) {
-                                                                          // Correct Answer
-                                                                          await showDialog(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (alertDialogContext) {
-                                                                              return AlertDialog(
-                                                                                title: const Text('Correct'),
-                                                                                content: Text('You have completed the qn in: ${_model.timerValue}'),
-                                                                                actions: [
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                    child: const Text('Ok'),
-                                                                                  ),
-                                                                                ],
-                                                                              );
-                                                                            },
-                                                                          );
-                                                                        } else {
-                                                                          // Wrong answer
-                                                                          await showDialog(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (alertDialogContext) {
-                                                                              return AlertDialog(
-                                                                                title: const Text('Wrong'),
-                                                                                content: Text((List<String> var1) {
-                                                                                  return var1.join("");
-                                                                                }(FFAppState().ansList.toList())),
-                                                                                actions: [
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                    child: const Text('Ok'),
-                                                                                  ),
-                                                                                ],
-                                                                              );
-                                                                            },
-                                                                          );
-                                                                        }
-                                                                        setState(() {
-                                                                          showFeedback = true;
-                                                                        });
-
-                                                                        if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.completionRate ==
-                                                                            1.0) {
-                                                                          context
-                                                                              .pushNamed('KidsPerfect');
-
-                                                                          // Remove Ans Length
-                                                                          FFAppState().ansLength =
-                                                                              [];
+                                                                          FFButtonWidget(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          // Minus 1 to selectedQn
+                                                                          FFAppState()
+                                                                              .selectedQuestion = FFAppState()
+                                                                                  .selectedQuestion +
+                                                                              -1;
                                                                           safeSetState(
                                                                               () {});
+                                                                          // Change qn detail
+                                                                          FFAppState().newSelectedQnDetail = FFAppState()
+                                                                              .newQuestionList
+                                                                              .elementAtOrNull(FFAppState().selectedQuestion +
+                                                                                  1)!
+                                                                              .questionResponseDTO;
+                                                                          safeSetState(
+                                                                              () {});
+                                                                          // Clear ansList
+                                                                          FFAppState().ansList =
+                                                                              [];
+                                                                          _model.updatePage(
+                                                                              () {});
+                                                                          await Future.delayed(const Duration(
+                                                                              milliseconds:
+                                                                                  100));
                                                                           // Reset Answer Input
                                                                           FFAppState()
                                                                               .ansList = [
@@ -989,180 +818,359 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                               String>();
                                                                           FFAppState()
                                                                               .update(() {});
-                                                                          if (shouldSetState) {
-                                                                            safeSetState(() {});
-                                                                          }
-                                                                          return;
-                                                                        } else {
-                                                                          // Next Question
-                                                                          FFAppState().selectedQuestion =
-                                                                              FFAppState().selectedQuestion + 1;
-                                                                          safeSetState(
-                                                                              () {});
-                                                                          // Set QnList to update correct/wrong answers
-                                                                          FFAppState()
-                                                                              .newQuestionList = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
-                                                                                  ''))!
-                                                                              .assignmentQuestionResponseDTOList
-                                                                              .toList()
-                                                                              .cast<AssignmentResponseDTOStruct>();
-                                                                          safeSetState(
-                                                                              () {});
-                                                                        }
-
-                                                                        // Clear ansList
-                                                                        FFAppState().ansList =
-                                                                            [];
-                                                                        _model.updatePage(
-                                                                            () {});
-                                                                        await Future.delayed(const Duration(
-                                                                            milliseconds:
-                                                                                100));
-                                                                        // Reset Answer Input
-                                                                        FFAppState()
-                                                                            .ansList = [
-                                                                          "",
-                                                                          "",
-                                                                          "",
-                                                                          ""
-                                                                        ].toList().cast<
-                                                                            String>();
-                                                                        FFAppState()
-                                                                            .update(() {});
-                                                                        // Set Next Question Detail
-                                                                        FFAppState()
-                                                                            .newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
-                                                                                ''))!
-                                                                            .assignmentQuestionResponseDTOList
-                                                                            .elementAtOrNull(FFAppState().selectedQuestion -
-                                                                                1)!
-                                                                            .questionResponseDTO;
-                                                                        safeSetState(
-                                                                            () {});
-                                                                        // Reset Timer
-                                                                        _model
-                                                                            .timerController
-                                                                            .onResetTimer();
-
-                                                                        // Start Timer
-                                                                        _model
-                                                                            .timerController
-                                                                            .onStartTimer();
-                                                                        if (shouldSetState) {
-                                                                          safeSetState(
-                                                                              () {});
-                                                                        }
-                                                                      },
-                                                                      text:
-                                                                          'Next >',
-                                                                      options:
-                                                                          FFButtonOptions(
-                                                                        width:
-                                                                            136.0,
-                                                                        height:
-                                                                            38.0,
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            24.0,
-                                                                            0.0,
-                                                                            24.0,
-                                                                            0.0),
-                                                                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primary,
-                                                                        textStyle: FlutterFlowTheme.of(context)
-                                                                            .titleSmall
-                                                                            .override(
-                                                                              fontFamily: 'DM Sans',
-                                                                              color: Colors.white,
-                                                                              letterSpacing: 0.0,
-                                                                            ),
-                                                                        elevation:
-                                                                            3.0,
-                                                                        borderSide:
-                                                                            const BorderSide(
-                                                                          color:
-                                                                              Colors.transparent,
+                                                                          _model
+                                                                              .timerController
+                                                                              .onResetTimer();
+                  
+                                                                          _model
+                                                                              .timerController
+                                                                              .onStartTimer();
+                                                                        },
+                                                                        text:
+                                                                            '< Back',
+                                                                        options:
+                                                                            FFButtonOptions(
                                                                           width:
-                                                                              1.0,
+                                                                              136.0,
+                                                                          height:
+                                                                              38.0,
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              24.0,
+                                                                              0.0,
+                                                                              24.0,
+                                                                              0.0),
+                                                                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .primaryBackground,
+                                                                          textStyle: FlutterFlowTheme.of(context)
+                                                                              .titleSmall
+                                                                              .override(
+                                                                                fontFamily: 'DM Sans',
+                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                          elevation:
+                                                                              3.0,
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
                                                                         ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(8.0),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                              ].divide(const SizedBox(
-                                                                  width: 15.0)),
-                                                            ),
-                                                          ],
+                                                                  if (FFAppState()
+                                                                          .selectedQuestion <
+                                                                      (StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
+                                                                                  ''))!
+                                                                              .assignmentQuestionResponseDTOList
+                                                                              .length +
+                                                                          1))
+                                                                    Padding(
+                                                                      padding: const EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              6.0),
+                                                                      child:
+                                                                          FFButtonWidget(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          var shouldSetState =
+                                                                              false;
+                  
+                                                                          var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split("+").map((element) => element.replaceAll("=", "")).toList();
+                  
+                                                                          // Call Attempt API
+                                                                          _model.assignmentResponse = await LiveQuestionManagementGroup
+                                                                              .attemptQuestionCall
+                                                                              .call(
+                                                                            questionId: FFAppState()
+                                                                                .newSelectedQnDetail
+                                                                                .id.toString(),
+                                                                            answer: (List<String>
+                                                                                ansList) {
+                                                                              return ansList.join().replaceAll("a",
+                                                                                  "");
+                                                                            }(FFAppState()
+                                                                                .ansList
+                                                                                .toList()),
+                                                                            studentId: FFAppState()
+                                                                                .MockStudent
+                                                                                .studentId,
+                                                                            assignmentId:
+                                                                                widget.assignmentId,
+                                                                            additionalDetailsJson:
+                                                                            [AdditionalDetailObjectStruct(
+                                                                              mathOperation: "Addition",
+                                                                              mathSteps: [MathStepStruct(digit1: int.parse(listDigits[0]), digit2: int.parse(listDigits[1]), carry: 0, currSum: int.parse(FFAppState().ansList.join()))]
+                                                                            ).toMap()],
+                                                                            authToken: currentJwtToken,
+                                                                          );
+                  
+                                                                          shouldSetState =
+                                                                              true;
+                                                                          if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
+                                                                                  ''))!
+                                                                              .assignmentQuestionResponseDTOList
+                                                                              .where((e) =>
+                                                                                  e.questionResponseDTO.id ==
+                                                                                  FFAppState().newSelectedQnDetail.id)
+                                                                              .toList()
+                                                                              .firstOrNull!
+                                                                              .normalQuestionAttemptResponseDTO
+                                                                              .isCorrect) {
+                                                                            // Correct Answer
+                                                                            await showDialog(
+                                                                              context:
+                                                                                  context,
+                                                                              builder:
+                                                                                  (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: const Text('Correct'),
+                                                                                  content: Text('You have completed the qn in: ${_model.timerValue}'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                      child: const Text('Ok'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                          } else {
+                                                                            // Wrong answer
+                                                                            await showDialog(
+                                                                              context:
+                                                                                  context,
+                                                                              builder:
+                                                                                  (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: const Text('Wrong'),
+                                                                                  content: Text((List<String> var1) {
+                                                                                    return var1.join("");
+                                                                                  }(FFAppState().ansList.toList())),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                      child: const Text('Ok'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                          }
+                                                                          setState(() {
+                                                                            showFeedback = true;
+                                                                          });
+                  
+                                                                          if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.completionRate ==
+                                                                              1.0) {
+                                                                            context
+                                                                                .pushNamed('KidsPerfect');
+                  
+                                                                            // Remove Ans Length
+                                                                            FFAppState().ansLength =
+                                                                                [];
+                                                                            safeSetState(
+                                                                                () {});
+                                                                            // Reset Answer Input
+                                                                            FFAppState()
+                                                                                .ansList = [
+                                                                              "",
+                                                                              "",
+                                                                              "",
+                                                                              ""
+                                                                            ].toList().cast<
+                                                                                String>();
+                                                                            FFAppState()
+                                                                                .update(() {});
+                                                                            if (shouldSetState) {
+                                                                              safeSetState(() {});
+                                                                            }
+                                                                            return;
+                                                                          } else {
+                                                                            // Next Question
+                                                                            FFAppState().selectedQuestion =
+                                                                                FFAppState().selectedQuestion + 1;
+                                                                            safeSetState(
+                                                                                () {});
+                                                                            // Set QnList to update correct/wrong answers
+                                                                            FFAppState()
+                                                                                .newQuestionList = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
+                                                                                    ''))!
+                                                                                .assignmentQuestionResponseDTOList
+                                                                                .toList()
+                                                                                .cast<AssignmentResponseDTOStruct>();
+                                                                            safeSetState(
+                                                                                () {});
+                                                                          }
+                  
+                                                                          // Clear ansList
+                                                                          FFAppState().ansList =
+                                                                              [];
+                                                                          _model.updatePage(
+                                                                              () {});
+                                                                          await Future.delayed(const Duration(
+                                                                              milliseconds:
+                                                                                  100));
+                                                                          // Reset Answer Input
+                                                                          FFAppState()
+                                                                              .ansList = [
+                                                                            "",
+                                                                            "",
+                                                                            "",
+                                                                            ""
+                                                                          ].toList().cast<
+                                                                              String>();
+                                                                          FFAppState()
+                                                                              .update(() {});
+                                                                          // Set Next Question Detail
+                                                                          FFAppState()
+                                                                              .newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap((_model.responseQuestionList?.jsonBody ??
+                                                                                  ''))!
+                                                                              .assignmentQuestionResponseDTOList
+                                                                              .elementAtOrNull(FFAppState().selectedQuestion -
+                                                                                  1)!
+                                                                              .questionResponseDTO;
+                                                                          safeSetState(
+                                                                              () {});
+                                                                          // Reset Timer
+                                                                          _model
+                                                                              .timerController
+                                                                              .onResetTimer();
+                  
+                                                                          // Start Timer
+                                                                          _model
+                                                                              .timerController
+                                                                              .onStartTimer();
+                                                                          if (shouldSetState) {
+                                                                            safeSetState(
+                                                                                () {});
+                                                                          }
+                                                                        },
+                                                                        text:
+                                                                            'Next >',
+                                                                        options:
+                                                                            FFButtonOptions(
+                                                                          width:
+                                                                              136.0,
+                                                                          height:
+                                                                              38.0,
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              24.0,
+                                                                              0.0,
+                                                                              24.0,
+                                                                              0.0),
+                                                                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .primary,
+                                                                          textStyle: FlutterFlowTheme.of(context)
+                                                                              .titleSmall
+                                                                              .override(
+                                                                                fontFamily: 'DM Sans',
+                                                                                color: Colors.white,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                          elevation:
+                                                                              3.0,
+                                                                          borderSide:
+                                                                              const BorderSide(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                ].divide(const SizedBox(
+                                                                    width: 15.0)),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ].divide(const SizedBox(height: 19.0)),
+                                      ),
+                                      Stack(
+                                        children: [
+                                          Align(
+                                            alignment: const AlignmentDirectional(1.1, -0.17),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Stand_up.gif',
+                                                width: 373.0,
+                                                height: 373.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        Builder(
+                                          builder: (context) {
+                                            if (true) {
+                                              return Align(
+                                              alignment:
+                                                  const AlignmentDirectional(0.72, -0.57),
+                                              child: 
+                                                SizedBox(
+                                                  width: 200,
+                                                  height: 300,
+                                                  child: BubbleSpecialThree(
+                                                    text: 'You got the question wrong, maybe you can try considering inputting a different number for the answer or look at it from a different angle.',
+                                                    color: const Color(0xFFE8E8EE),
+                                                    tail: true,
+                                                    textStyle:  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: const Color.fromARGB(255, 0, 0, 0),
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                        lineHeight: 1.5,
+                                                      )
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ].divide(const SizedBox(height: 19.0)),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          const AlignmentDirectional(1.12, -0.47),
-                                      child: 
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.asset(
-                                              'assets/images/Stand_up.gif',
-                                              width: 373.0,
-                                              height: 373.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                    ),
-                                    Builder(
-                                      builder: (context) {
-                                        if (showFeedback) {
-                                          return Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.72, -0.37),
-                                          child: 
-                                            SizedBox(
-                                              width: 300,
-                                              height: 300,
-                                              child: BubbleSpecialThree(
-                                                text: 'You got the question wrong, maybe you can try considering inputting a different number for the answer or look at it from a different angle.',
-                                                color: const Color(0xFFE8E8EE),
-                                                tail: true,
-                                                textStyle:  FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color.fromARGB(255, 0, 0, 0),
-                                                    fontSize: 14.0,
-                                                    letterSpacing: 0.0,
-                                                    lineHeight: 1.5,
-                                                  )
-                                              ),
-                                            ),
-                                        );
-                                        } else {
-                                          return Container();
-                                        }
-                                    }),
-                                  ],
+                                                ),
+                                            );
+                                            } else {
+                                              return Container();
+                                            }
+                                        }),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               if (FFAppState().isLoading)
                 wrapWithModel(
