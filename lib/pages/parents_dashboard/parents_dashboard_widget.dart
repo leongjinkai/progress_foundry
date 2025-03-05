@@ -2030,6 +2030,7 @@ class _ParentsDashboardWidgetState extends State<ParentsDashboardWidget> {
                                     )),
                                     questionSubLevel: 'DOUBLE_SEQUENTIAL',
                                     questionType: 'SHORT_ANSWER',
+                                    authToken: currentJwtToken
                                   );
 
                                   if ((_model.createdAssignment?.succeeded ??
