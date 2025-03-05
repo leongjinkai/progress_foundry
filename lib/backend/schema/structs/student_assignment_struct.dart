@@ -17,6 +17,7 @@ class StudentAssignmentStruct extends BaseStruct {
     String? questionLevel,
     String? questionSubLevel,
     String? questionType,
+    String? feedback,
     List<AssignmentResponseDTOStruct>? assignmentQuestionResponseDTOList,
   })  : _id = id,
         _assignmentName = assignmentName,
@@ -29,6 +30,7 @@ class StudentAssignmentStruct extends BaseStruct {
         _questionLevel = questionLevel,
         _questionSubLevel = questionSubLevel,
         _questionType = questionType,
+        _feedback = feedback,
         _assignmentQuestionResponseDTOList = assignmentQuestionResponseDTOList;
 
   // "id" field.
@@ -111,6 +113,13 @@ class StudentAssignmentStruct extends BaseStruct {
 
   bool hasQuestionType() => _questionType != null;
 
+  // "feedback" field.
+  String? _feedback;
+  String get feedback => _feedback ?? '';
+  set feedback(String? val) => _feedback = val;
+
+  bool hasFeedback() => _feedback != null;
+
   // "assignmentQuestionResponseDTOList" field.
   List<AssignmentResponseDTOStruct>? _assignmentQuestionResponseDTOList;
   List<AssignmentResponseDTOStruct> get assignmentQuestionResponseDTOList =>
@@ -138,6 +147,7 @@ class StudentAssignmentStruct extends BaseStruct {
         questionLevel: data['questionLevel'] as String?,
         questionSubLevel: data['questionSubLevel'] as String?,
         questionType: data['questionType'] as String?,
+        feedback: data['feedback'] as String?,
         assignmentQuestionResponseDTOList: getStructList(
           data['assignmentQuestionResponseDTOList'],
           AssignmentResponseDTOStruct.fromMap,
@@ -160,6 +170,7 @@ class StudentAssignmentStruct extends BaseStruct {
         'questionLevel': _questionLevel,
         'questionSubLevel': _questionSubLevel,
         'questionType': _questionType,
+        'feedback': _feedback,
         'assignmentQuestionResponseDTOList':
             _assignmentQuestionResponseDTOList?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
@@ -208,6 +219,10 @@ class StudentAssignmentStruct extends BaseStruct {
         ),
         'questionType': serializeParam(
           _questionType,
+          ParamType.String,
+        ),
+        'feedback': serializeParam(
+          _feedback,
           ParamType.String,
         ),
         'assignmentResponseDTOList': serializeParam(
@@ -275,6 +290,11 @@ class StudentAssignmentStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        feedback: deserializeParam(
+          data['feedback'],
+          ParamType.String,
+          false,
+        ),
         assignmentQuestionResponseDTOList:
             deserializeStructParam<AssignmentResponseDTOStruct>(
           data['assignmentResponseDTOList'],
@@ -302,6 +322,7 @@ class StudentAssignmentStruct extends BaseStruct {
         questionLevel == other.questionLevel &&
         questionSubLevel == other.questionSubLevel &&
         questionType == other.questionType &&
+        feedback == other.feedback &&
         listEquality.equals(
             assignmentQuestionResponseDTOList, other.assignmentQuestionResponseDTOList);
   }
@@ -319,6 +340,7 @@ class StudentAssignmentStruct extends BaseStruct {
         questionLevel,
         questionSubLevel,
         questionType,
+        feedback,
         assignmentQuestionResponseDTOList
       ]);
 }
@@ -335,6 +357,7 @@ StudentAssignmentStruct createStudentAssignmentStruct({
   String? questionLevel,
   String? questionSubLevel,
   String? questionType,
+  String? feedback,
 }) =>
     StudentAssignmentStruct(
       id: id,
@@ -348,4 +371,5 @@ StudentAssignmentStruct createStudentAssignmentStruct({
       questionLevel: questionLevel,
       questionSubLevel: questionSubLevel,
       questionType: questionType,
+      feedback: feedback,
     );

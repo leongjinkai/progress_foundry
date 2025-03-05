@@ -35,7 +35,7 @@ class KidAdditionWidget extends StatefulWidget {
 
 class _KidAdditionWidgetState extends State<KidAdditionWidget> {
   late KidAdditionModel _model;
-  bool showFeedback = false;
+  String showFeedback = "";
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -949,6 +949,9 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             );
                                                                           } else {
                                                                             // Wrong answer
+                                                                            setState(() {
+                                                                              showFeedback = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ""))!.feedback;
+                                                                            });
                                                                             await showDialog(
                                                                               context:
                                                                                   context,
@@ -969,9 +972,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                               },
                                                                             );
                                                                           }
-                                                                          setState(() {
-                                                                            showFeedback = true;
-                                                                          });
                   
                                                                           if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.completionRate ==
                                                                               1.0) {
@@ -1131,7 +1131,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                           ),
                                         Builder(
                                           builder: (context) {
-                                            if (true) {
+                                            if (showFeedback.isNotEmpty) {
                                               return Align(
                                               alignment:
                                                   const AlignmentDirectional(0.72, -0.57),
@@ -1140,7 +1140,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                   width: 200,
                                                   height: 300,
                                                   child: BubbleSpecialThree(
-                                                    text: 'You got the question wrong, maybe you can try considering inputting a different number for the answer or look at it from a different angle.',
+                                                    text: showFeedback,
                                                     color: const Color(0xFFE8E8EE),
                                                     tail: true,
                                                     textStyle:  FlutterFlowTheme.of(context)
