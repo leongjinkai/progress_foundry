@@ -146,6 +146,8 @@ List<String> getCarryOverNumList(String qnLevel) {
   switch (qnLevel) {
     case "SINGLE_DIGIT":
       return [""];
+    case "DOUBLE_DIGIT":
+      return ["", ""];
     default:
       return [];
   }
@@ -155,6 +157,8 @@ List<String> getAdditionAnsLength(String qnLevel) {
   switch (qnLevel) {
     case "SINGLE_DIGIT":
       return ["1", "1"];
+    case "DOUBLE_DIGIT":
+      return ["1", "1", "1"];
     default:
       return ["1"];
   }
@@ -162,8 +166,10 @@ List<String> getAdditionAnsLength(String qnLevel) {
 
 String getQnLevelFromDropdown(String dropdownText) {
   switch (dropdownText) {
-    case "Adding to 10":
+    case "Adding to 10" || "Subtracting to 10" || "Multiplication to 10" || "Division to 10":
       return "SINGLE_DIGIT";
+    case "Adding to 100" || "Subtracting to 100" || "Multiplication to 100" || "Division to 100":
+      return "DOUBLE_DIGIT";
     default:
       return "";
   }

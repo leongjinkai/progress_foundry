@@ -139,7 +139,7 @@ class _SelectProfileWidgetState extends State<SelectProfileWidget> {
                         child: Container(
                           decoration: const BoxDecoration(),
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(

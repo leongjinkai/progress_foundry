@@ -208,7 +208,7 @@ class _KidsHomeWidgetState extends State<KidsHomeWidget> {
         body: SafeArea(
           top: true,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
