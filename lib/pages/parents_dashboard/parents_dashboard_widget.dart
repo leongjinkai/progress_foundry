@@ -59,6 +59,37 @@ class _ParentsDashboardWidgetState extends State<ParentsDashboardWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
+    Map<String, List<String>> options = 
+    {  
+        'Addition': 
+          [
+            'Adding to 10',
+            'Adding to 100',
+            'Adding to 1000',
+            'Challenge'
+          ],
+        'Subtraction': 
+          [
+            'Subtracting to 10',
+            'Subtracting to 100',
+            'Subtracting to 1000',
+            'Challenge'
+          ],
+        'Multiplication': 
+          [
+            'Multiplcation to 10',
+            'Multiplcation to 100',
+            'Multiplcation to 1000',
+            'Challenge'
+          ],
+        'Division': 
+          [
+            'Division to 10',
+            'Division to 100',
+            'Division to 1000',
+            'Challenge'
+          ],
+    };
 
     return GestureDetector(
       onTap: () {
@@ -1559,12 +1590,7 @@ class _ParentsDashboardWidgetState extends State<ParentsDashboardWidget> {
                                           controller: _model
                                                   .dropDownValueController1 ??=
                                               FormFieldController<String>(null),
-                                          options: const [
-                                            'Addition',
-                                            'Subtraction',
-                                            'Multiplication',
-                                            'Division'
-                                          ],
+                                          options: options.entries.map((option) => option.key).toList(),
                                           onChanged: (val) => safeSetState(() =>
                                               _model.dropDownValue1 = val),
                                           width:
@@ -1641,12 +1667,7 @@ class _ParentsDashboardWidgetState extends State<ParentsDashboardWidget> {
                                                     .dropDownValueController2 ??=
                                                 FormFieldController<String>(
                                                     null),
-                                            options: const [
-                                              'Adding to 10',
-                                              'Adding to 100',
-                                              'Adding to 1000',
-                                              'Challenge'
-                                            ],
+                                            options: options[_model.dropDownValue1] ?? [],
                                             onChanged: (val) => safeSetState(
                                                 () => _model.dropDownValue2 =
                                                     val),
