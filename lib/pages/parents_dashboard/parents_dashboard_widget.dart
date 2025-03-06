@@ -2049,7 +2049,11 @@ class _ParentsDashboardWidgetState extends State<ParentsDashboardWidget> {
                                       _model.dropDownValue2,
                                       'xxx',
                                     )),
-                                    questionSubLevel: 'DOUBLE_SEQUENTIAL',
+                                    questionSubLevel: functions.getQnSubLevelFromDropdown(_model.dropDownValue1 ?? "", functions.getQnLevelFromDropdown(
+                                            valueOrDefault<String>(
+                                      _model.dropDownValue2,
+                                      'xxx',
+                                    ))),
                                     questionType: 'SHORT_ANSWER',
                                     authToken: currentJwtToken
                                   );

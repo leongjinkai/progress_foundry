@@ -170,6 +170,50 @@ String getQnLevelFromDropdown(String dropdownText) {
       return "SINGLE_DIGIT";
     case "Adding to 100" || "Subtracting to 100" || "Multiplication to 100" || "Division to 100":
       return "DOUBLE_DIGIT";
+    case "Adding to 1000" || "Subtracting to 1000" || "Multiplication to 1000" || "Division to 1000":
+      return "TRIPLE_DIGIT";
+    default:
+      return "";
+  }
+}
+
+String getQnSubLevelFromDropdown(String selectedQnCat, String qnLevel) {
+  switch (selectedQnCat) {
+    case "Addition":
+      switch (qnLevel) {
+        case "SINGLE_DIGIT":
+          return "DOUBLE_SEQUENTIAL";
+        case "DOUBLE_DIGIT":
+          return "SEQUENTIAL_FIRST_OPERAND_IN_TENS_WITH_SEQUENTIAL_SINGLE_DIGIT_SECOND_OPERAND";
+        case "TRIPLE_DIGIT":
+          return "SEQUENTIAL_FIRST_OPERAND_WITH_RANDOM_SINGLE_OR_DOUBLE_DIGIT_SECOND_OPERAND";
+        default:
+          return "";
+      }
+    case "Subtraction":
+      switch (qnLevel) {
+        case "SINGLE_DIGIT":
+          return "RANDOM_WITH_SECOND_OPERAND_BELOW_FIVE";
+        case "DOUBLE_DIGIT":
+          return "SEQUENTIAL_FIRST_OPERAND_IN_TENS_WITH_RANDOM_SINGLE_DIGIT_SECOND_OPERAND";
+        case "TRIPLE_DIGIT":
+          return "SEQUENTIAL_FIRST_OPERAND_WITH_RANDOM_SINGLE_OR_DOUBLE_DIGIT_SECOND_OPERAND";
+        default:
+          return "";
+      }
+    case "Multiplication":
+      return "";
+    case "Division":
+      switch (qnLevel) {
+        case "SINGLE_DIGIT":
+          return "DOUBLE_SEQUENTIAL";
+        case "DOUBLE_DIGIT":
+          return "RANDOM_SINGLE_OR_DOUBLE_DIGIT_NUMERATOR_AND_RANDOM_SINGLE_DIGIT_DENOMINATOR";
+        case "TRIPLE_DIGIT":
+          return "RANDOM_TRIPLE_NUMERATOR_AND_RANDOM_SINGLE_DIGIT_DENOMINATOR";
+        default:
+          return "";
+      }
     default:
       return "";
   }
