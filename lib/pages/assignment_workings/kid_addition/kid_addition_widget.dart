@@ -40,7 +40,10 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> headerTitles =
   {
-    "ADDITION - SINGLE_DIGIT": "Adding to 10"
+    "ADDITION - SINGLE_DIGIT": "Adding to 10",
+    "ADDITION - DOUBLE_DIGIT": "Adding to 100",
+    "SUBTRACTION - SINGLE_DIGIT": "Subtracting to 10",
+    "SUBTRACTION - DOUBLE_DIGIT": "Subtracting to 100"
   };
   String questionCatAndLevel = "";
 
@@ -210,7 +213,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: (MediaQuery.sizeOf(context).width / 5 * 4).clamp(1000, 2000),
+                                  width: ((MediaQuery.sizeOf(context).width / 5 * 4) - 40).clamp(1000, 2000),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
@@ -895,7 +898,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             var shouldSetState =
                                                                                 false;
                                                         
-                                                                            var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split("+").map((element) => element.replaceAll("=", "")).toList();
+                                                                            var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split(FFAppState().newSelectedQnDetail.questionSubject == "Addition" ? "+" : "-").map((element) => element.replaceAll("=", "")).toList();
                                                         
                                                                             // Call Attempt API
                                                                             _model.assignmentResponse = await LiveQuestionManagementGroup
@@ -918,7 +921,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                   widget.assignmentId,
                                                                               additionalDetailsJson:
                                                                               [AdditionalDetailObjectStruct(
-                                                                                mathOperation: "Addition",
+                                                                                mathOperation: FFAppState().newSelectedQnDetail.questionTopic,
                                                                                 mathSteps: [MathStepStruct(digit1: int.parse(listDigits[0]), digit2: int.parse(listDigits[1]), carry: 0, currSum: int.parse(FFAppState().ansList.join()))]
                                                                               ).toMap()],
                                                                               authToken: currentJwtToken,
@@ -1124,48 +1127,50 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                         Stack(
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(1.1, -0.17),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/Stand_up.gif',
-                                                  width: 313.0,
-                                                  height: 313.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          Builder(
-                                            builder: (context) {
-                                              if (showFeedback.isNotEmpty) {
-                                                return Align(
-                                                alignment:
-                                                    const AlignmentDirectional(0.82, -0.47),
-                                                child: 
-                                                  SizedBox(
-                                                    width: 200,
-                                                    height: 300,
-                                                    child: BubbleSpecialThree(
-                                                      text: showFeedback,
-                                                      color: const Color(0xFFE8E8EE),
-                                                      tail: true,
-                                                      textStyle:  FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: const Color.fromARGB(255, 0, 0, 0),
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          lineHeight: 1.5,
-                                                        )
+                                              alignment: const AlignmentDirectional(1, -0.17),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Builder(
+                                                    builder: (context) {
+                                                      if (showFeedback.isNotEmpty) {
+                                                        return Container(
+                                                          alignment: Alignment.bottomLeft,
+                                                          width: 240,
+                                                          child: BubbleSpecialThree(
+                                                            isSender: false,
+                                                            text: showFeedback,
+                                                            color: const Color(0xFFE8E8EE),
+                                                            tail: true,
+                                                            textStyle:  FlutterFlowTheme.of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: 'Poppins',
+                                                                color: const Color.fromARGB(255, 0, 0, 0),
+                                                                fontSize: 14.0,
+                                                                letterSpacing: 0.0,
+                                                                lineHeight: 1.5,
+                                                              )
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return Container();
+                                                      }
+                                                  }),
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/Stand_up_2.gif',
+                                                      width: 183.0,
+                                                      height: 183.0,
+                                                      fit: BoxFit.contain,
                                                     ),
                                                   ),
-                                              );
-                                              } else {
-                                                return Container();
-                                              }
-                                          }),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],

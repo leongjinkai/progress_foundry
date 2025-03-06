@@ -77,6 +77,8 @@ String? getOperatorFromTopic(String questionTopic) {
   switch (questionTopic) {
     case "ADDITION":
       return "+";
+    case "SUBTRACTION":
+      return "-";
     default:
       return "?";
   }

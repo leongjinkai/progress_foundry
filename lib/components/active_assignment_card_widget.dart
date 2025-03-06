@@ -104,7 +104,7 @@ class _ActiveAssignmentCardWidgetState
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 6.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      if (widget.qnTopic == 'ADDITION') {
+                      if (widget.qnTopic == 'ADDITION' || widget.qnTopic == "SUBTRACTION") {
                         context.pushNamed(
                           'KidAddition',
                           queryParameters: {
