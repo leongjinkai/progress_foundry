@@ -71,16 +71,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
               (_model.responseQuestionList?.jsonBody ?? ''))!
           .assignmentQuestionResponseDTOList
           .isNotEmpty) {
-        // New Set Selected QN Detail
-        FFAppState().newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap(
-                (_model.responseQuestionList?.jsonBody ?? ''))!
-            .assignmentQuestionResponseDTOList
-            .firstOrNull!
-            .questionResponseDTO;
-        safeSetState(() {});
-        // Set Loading False
-        FFAppState().isLoading = false;
-        safeSetState(() {});
         List<AssignmentResponseDTOStruct> unsortedQnList = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
             .assignmentQuestionResponseDTOList
@@ -88,6 +78,12 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
             .cast<AssignmentResponseDTOStruct>();
         unsortedQnList.sort((a, b) => a.questionResponseDTO.id.compareTo(b.questionResponseDTO.id));
         FFAppState().newQuestionList = unsortedQnList;
+        safeSetState(() {});
+        // New Set Selected QN Detail
+        FFAppState().newSelectedQnDetail = unsortedQnList.firstOrNull!.questionResponseDTO;
+        safeSetState(() {});
+        // Set Loading False
+        FFAppState().isLoading = false;
         safeSetState(() {});
         _model.timerController.onStartTimer();
         return;
