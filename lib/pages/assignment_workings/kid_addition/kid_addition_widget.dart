@@ -181,7 +181,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                         return ListView.separated(
                                           padding: const EdgeInsets.fromLTRB(
                                             0,
-                                            104.0,
+                                            54.0,
                                             0,
                                             0,
                                           ),
@@ -215,7 +215,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: ((MediaQuery.sizeOf(context).width / 5 * 4) - 40).clamp(1000, 2000),
+                                  width: ((MediaQuery.sizeOf(context).width - 228)).clamp(1000, 2000),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
@@ -229,9 +229,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                           Container(
                                             width:
                                                 MediaQuery.sizeOf(context).width *
-                                                    1.0,
-                                            height:
-                                                MediaQuery.sizeOf(context).height *
                                                     1.0,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
@@ -247,9 +244,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                             width:
                                                 MediaQuery.sizeOf(context).width *
                                                     1.0,
-                                            height:
-                                                MediaQuery.sizeOf(context).height *
-                                                    1.0,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 fit: BoxFit.cover,
@@ -263,9 +257,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                           Container(
                                             width:
                                                 MediaQuery.sizeOf(context).width *
-                                                    1.0,
-                                            height:
-                                                MediaQuery.sizeOf(context).height *
                                                     1.0,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
