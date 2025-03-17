@@ -192,7 +192,7 @@ class _LandingWidgetState extends State<LandingWidget> {
                                         0.0, 0.0, 0.0, 4.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context.pushNamed('SignIn');
+                                        context.pushNamed('SelectProfile');
                                       },
                                       text: 'Sign in',
                                       options: FFButtonOptions(
