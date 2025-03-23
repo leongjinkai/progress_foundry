@@ -64,13 +64,6 @@ class _QuestionBubbleNewWidgetState extends State<QuestionBubbleNewWidget> {
               .elementAtOrNull((widget.questionNumber!) - 1)!
               .questionResponseDTO;
           _model.updatePage(() {});
-          // Clear ansList
-          FFAppState().ansList = [];
-          _model.updatePage(() {});
-          await Future.delayed(const Duration(milliseconds: 100));
-          // Reset Answer Input
-          FFAppState().ansList = ["", "", "", ""].toList().cast<String>();
-          _model.updatePage(() {});
         },
         child: Container(
           width: MediaQuery.sizeOf(context).width * 1.0,

@@ -1,3 +1,5 @@
+import 'package:progress_foundry/components/generated_c_o_field_model.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/components/generated_ans_field_widget.dart';
 import '/components/loading_widget.dart';
@@ -33,6 +35,8 @@ class KidAdditionModel extends FlutterFlowModel<KidAdditionWidget> {
   // Models for generatedAnsField dynamic component.
   late FlutterFlowDynamicModels<GeneratedAnsFieldModel> generatedAnsFieldModels;
   // Stores action output result for [Backend Call - API (Attempt Question)] action in Button widget.
+  // Models for generatedcarryOverField dynamic component.
+  late FlutterFlowDynamicModels<GeneratedCOFieldModel> generatedCOFieldModels;
   ApiCallResponse? assignmentResponse;
   // Model for Loading component.
   late LoadingModel loadingModel;
@@ -43,6 +47,8 @@ class KidAdditionModel extends FlutterFlowModel<KidAdditionWidget> {
         FlutterFlowDynamicModels(() => QuestionBubbleNewModel());
     generatedAnsFieldModels =
         FlutterFlowDynamicModels(() => GeneratedAnsFieldModel());
+    generatedCOFieldModels =
+        FlutterFlowDynamicModels(() => GeneratedCOFieldModel());
     loadingModel = createModel(context, () => LoadingModel());
   }
 
@@ -53,6 +59,7 @@ class KidAdditionModel extends FlutterFlowModel<KidAdditionWidget> {
     unknownAnswerFocusNode?.dispose();
     unknownAnswerTextController?.dispose();
 
+    generatedCOFieldModels.dispose();
     generatedAnsFieldModels.dispose();
     loadingModel.dispose();
   }

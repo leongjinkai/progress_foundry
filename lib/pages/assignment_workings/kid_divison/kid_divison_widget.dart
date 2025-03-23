@@ -34,6 +34,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
   late KidDivisonModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  Map<int,TextEditingController> controllers = {};
 
   @override
   void initState() {
@@ -632,7 +633,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                               updateCallback: () => safeSetState(() {}),
                                                                               child: const GeneratedCOFieldWidget(
                                                                                 inputChar: '?',
-                                                                                ansId: '?',
+                                                                                ansId: 1,
                                                                               ),
                                                                             ),
                                                                           ].addToEnd(const SizedBox(width: 25.0)),
@@ -734,6 +735,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                             children:
                                                                                 List.generate(dividendLength.length, (dividendLengthIndex) {
                                                                               final dividendLengthItem = dividendLength[dividendLengthIndex];
+                                                                              var controller = controllers.putIfAbsent(dividendLengthIndex, () => TextEditingController());
                                                                               return wrapWithModel(
                                                                                 model: _model.generatedAnsFieldModels1.getModel(
                                                                                   dividendLengthIndex.toString(),
@@ -746,6 +748,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                                   ),
                                                                                   inputValue: FFAppState().ansList.elementAtOrNull(dividendLengthIndex)!,
                                                                                   idx: dividendLengthIndex,
+                                                                                  textEditingController: controller
                                                                                 ),
                                                                               );
                                                                             }).divide(const SizedBox(width: 8.0)),
@@ -802,6 +805,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                   final numAnswersItem =
                                                                       numAnswers[
                                                                           numAnswersIndex];
+                                                                  var controller = controllers.putIfAbsent(numAnswersIndex, () => TextEditingController());
                                                                   return wrapWithModel(
                                                                     model: _model
                                                                         .generatedAnsFieldModels2
@@ -824,6 +828,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                               numAnswersIndex)!,
                                                                       idx:
                                                                           numAnswersIndex,
+                                                                          textEditingController: controller,
                                                                     ),
                                                                   );
                                                                 }).divide(
@@ -857,6 +862,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                   final numAnswersItem =
                                                                       numAnswers[
                                                                           numAnswersIndex];
+                                                                  var controller = controllers.putIfAbsent(numAnswersIndex, () => TextEditingController());
                                                                   return wrapWithModel(
                                                                     model: _model
                                                                         .generatedAnsFieldModels3
@@ -879,6 +885,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                               numAnswersIndex)!,
                                                                       idx:
                                                                           numAnswersIndex,
+                                                                          textEditingController: controller,
                                                                     ),
                                                                   );
                                                                 }).divide(
@@ -920,6 +927,8 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                             final numAnswersItem =
                                                                 numAnswers[
                                                                     numAnswersIndex];
+                                                            var controller = controllers.putIfAbsent(numAnswersIndex, () => TextEditingController());
+
                                                             return wrapWithModel(
                                                               model: _model
                                                                   .generatedAnsFieldModels4
@@ -942,7 +951,9 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                         numAnswersIndex)!,
                                                                 idx:
                                                                     numAnswersIndex,
+                                                                    textEditingController: controller,
                                                               ),
+
                                                             );
                                                           }).divide(const SizedBox(
                                                               width: 8.0)),

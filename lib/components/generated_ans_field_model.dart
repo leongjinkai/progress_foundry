@@ -22,4 +22,8 @@ class GeneratedAnsFieldModel extends FlutterFlowModel<GeneratedAnsFieldWidget> {
     ansFieldFocusNode?.dispose();
     ansFieldTextController?.dispose();
   }
+
+  void resetTextInput() {
+    ansFieldTextController?.clear();
+  }
 }

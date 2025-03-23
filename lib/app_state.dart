@@ -141,7 +141,7 @@ class FFAppState extends ChangeNotifier {
     _selectedQuestion = value;
   }
 
-  List<String> _ansList = ['', '', '', ''];
+  List<String> _ansList = [];
   List<String> get ansList => _ansList;
   set ansList(List<String> value) {
     _ansList = value;
@@ -165,6 +165,21 @@ class FFAppState extends ChangeNotifier {
   ) {
     ansList[index] = updateFn(_ansList[index]);
   }
+
+  List<String> _carryOverList = ['', '', '', ''];
+  List<String> get carryOverList => _carryOverList;
+
+  set carryOverList(List<String> value) {
+    _carryOverList = value;
+  }
+
+  void updateCarryOverListAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    carryOverList[index] = updateFn(_carryOverList[index]);
+  }
+
 
   void insertAtIndexInAnsList(int index, String value) {
     ansList.insert(index, value);

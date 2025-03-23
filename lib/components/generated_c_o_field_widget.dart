@@ -1,3 +1,7 @@
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +17,7 @@ class GeneratedCOFieldWidget extends StatefulWidget {
   });
 
   final String? inputChar;
-  final String? ansId;
+  final int? ansId;
 
   @override
   State<GeneratedCOFieldWidget> createState() => _GeneratedCOFieldWidgetState();
@@ -33,6 +37,14 @@ class _GeneratedCOFieldWidgetState extends State<GeneratedCOFieldWidget> {
     super.initState();
     _model = createModel(context, () => GeneratedCOFieldModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      safeSetState(() {
+        _model.textController?.clear();
+      });
+    });
+
+
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -48,6 +60,8 @@ class _GeneratedCOFieldWidgetState extends State<GeneratedCOFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
@@ -120,6 +134,16 @@ class _GeneratedCOFieldWidgetState extends State<GeneratedCOFieldWidget> {
                   null,
               keyboardType: TextInputType.number,
               validator: _model.textControllerValidator.asValidator(context),
+              onChanged: (_) => EasyDebounce.debounce(
+                '_model.carryOverFieldTextController',
+                const Duration(milliseconds: 0),
+                () async {
+                  FFAppState().updateCarryOverListAtIndex(
+                    widget.ansId!,
+                    (_) => _model.textController.text,
+                  ); 
+                },
+              ),
             ),
           ),
         ),

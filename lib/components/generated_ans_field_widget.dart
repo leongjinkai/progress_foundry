@@ -13,10 +13,12 @@ class GeneratedAnsFieldWidget extends StatefulWidget {
     super.key,
     required this.inputValue,
     required this.idx,
+    required this.textEditingController
   });
 
   final String? inputValue;
   final int? idx;
+  final TextEditingController textEditingController;
 
   @override
   State<GeneratedAnsFieldWidget> createState() =>
@@ -71,15 +73,15 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
         child: SizedBox(
           width: 41.0,
           child: TextFormField(
-            controller: _model.ansFieldTextController,
+            controller: widget.textEditingController,
             focusNode: _model.ansFieldFocusNode,
             onChanged: (_) => EasyDebounce.debounce(
-              '_model.ansFieldTextController',
+              'widget.textEditingController',
               const Duration(milliseconds: 0),
               () async {
                 FFAppState().updateAnsListAtIndex(
                   widget.idx!,
-                  (_) => _model.ansFieldTextController.text,
+                  (_) => widget.textEditingController.text,
                 ); 
               },
             ),
