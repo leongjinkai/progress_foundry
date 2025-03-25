@@ -14,10 +14,12 @@ class GeneratedCOFieldWidget extends StatefulWidget {
     super.key,
     required this.inputChar,
     required this.ansId,
+    required this.controller
   });
 
   final String? inputChar;
   final int? ansId;
+  final TextEditingController controller;
 
   @override
   State<GeneratedCOFieldWidget> createState() => _GeneratedCOFieldWidgetState();
@@ -74,7 +76,7 @@ class _GeneratedCOFieldWidgetState extends State<GeneratedCOFieldWidget> {
           child: SizedBox(
             width: 41.0,
             child: TextFormField(
-              controller: _model.textController,
+              controller: widget.controller,
               focusNode: _model.textFieldFocusNode,
               autofocus: true,
               obscureText: false,
@@ -140,7 +142,7 @@ class _GeneratedCOFieldWidgetState extends State<GeneratedCOFieldWidget> {
                 () async {
                   FFAppState().updateCarryOverListAtIndex(
                     widget.ansId!,
-                    (_) => _model.textController.text,
+                    (_) => widget.controller.text,
                   ); 
                 },
               ),

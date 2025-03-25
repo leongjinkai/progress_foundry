@@ -628,14 +628,16 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                               MainAxisAlignment.end,
                                                                           children:
                                                                               [
-                                                                            wrapWithModel(
-                                                                              model: _model.generatedCOFieldModel,
-                                                                              updateCallback: () => safeSetState(() {}),
-                                                                              child: const GeneratedCOFieldWidget(
-                                                                                inputChar: '?',
-                                                                                ansId: 1,
-                                                                              ),
-                                                                            ),
+                                                                            // wrapWithModel(
+                                                                            //   model: _model.generatedCOFieldModel,
+                                                                            //   updateCallback: () => safeSetState(() {}),
+                                                                            //   child: const GeneratedCOFieldWidget(
+                                                                            //     inputChar: '?',
+                                                                            //     ansId: 1,
+                                                                            //     controller: controller
+                                                                            //   ),
+                                                                            // ),
+                                                                            Container()
                                                                           ].addToEnd(const SizedBox(width: 25.0)),
                                                                         ),
                                                                       ),

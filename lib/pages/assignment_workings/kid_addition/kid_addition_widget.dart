@@ -38,7 +38,8 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
   late KidAdditionModel _model;
   String showFeedback = "";
   final _formKey = GlobalKey<FormState>();
-  Map<int,TextEditingController> controllers = {};
+  Map<int,TextEditingController> ansControllers = {};
+  Map<int,TextEditingController> coControllers = {};
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> headerTitles =
@@ -632,7 +633,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                                   mainAxisSize: MainAxisSize.min,
                                                                                                   mainAxisAlignment: MainAxisAlignment.end,
                                                                                                   children: List.generate(numCarryOver.length, (numCarryOverIndex) {
-                                                                                                    final numCarryOverItem = numCarryOver[numCarryOverIndex];
+                                                                                                    var controller = coControllers.putIfAbsent(numCarryOverIndex, () => TextEditingController());
                                                                                                     return wrapWithModel(
                                                                                                       model: _model.generatedCOFieldModels.getModel(
                                                                                                         numCarryOverIndex.toString(),
@@ -643,6 +644,8 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                                         key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
                                                                                                         inputChar: '?',
                                                                                                         ansId: numCarryOverIndex,
+                                                                                                        controller: controller
+
                                                                                                       ),
                                                                                                     );
                                                                                                   }).divide(const SizedBox(width: 8.0)),
@@ -707,7 +710,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             ),
                                                                           ],
                                                                         ),
-                                                                        AddSubAnsFields(model: _model, safeSetState: safeSetState, controllers: controllers),
+                                                                        AddSubAnsFields(model: _model, safeSetState: safeSetState, controllers: ansControllers),
                                                                       ].divide(const SizedBox(
                                                                           height:
                                                                               17.0)),
@@ -978,8 +981,11 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                 .questionResponseDTO;
                                                                             safeSetState(
                                                                                 () {});
-                                                                            for (var v in controllers.values) {
+                                                                            for (var v in ansControllers.values) {
                                                                               v.clear();
+                                                                            }
+                                                                            for (var x in coControllers.values) {
+                                                                              x.clear();
                                                                             }
                                                                             // Reset Timer
                                                                             _model
@@ -1170,8 +1176,6 @@ class AddSubAnsFieldsState extends State<AddSubAnsFields> {
           children: List.generate(
               numAnswers.length,
               (numAnswersIndex) {
-            final numAnswersItem =
-                numAnswers[numAnswersIndex];
             var controller = widget.controllers.putIfAbsent(
                     numAnswersIndex, () => TextEditingController());
             return wrapWithModel(
