@@ -64,85 +64,85 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      width: 41.0,
-      height: 41.0,
-      decoration: const BoxDecoration(),
+      width: 41,
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Align(
         alignment: const AlignmentDirectional(0.0, 0.0),
-        child: SizedBox(
-          width: 41.0,
-          child: TextFormField(
-            controller: widget.textEditingController,
-            focusNode: _model.ansFieldFocusNode,
-            onChanged: (_) => EasyDebounce.debounce(
-              'widget.textEditingController',
-              const Duration(milliseconds: 0),
-              () async {
-                FFAppState().updateAnsListAtIndex(
-                  widget.idx!,
-                  (_) => widget.textEditingController.text,
-                ); 
-              },
-            ),
-            autofocus: true,
-            obscureText: false,
-            decoration: InputDecoration(
-              isDense: true,
-              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                    fontFamily: 'DM Sans',
-                    letterSpacing: 0.0,
-                  ),
-              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                    fontFamily: 'DM Sans',
-                    letterSpacing: 0.0,
-                  ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  width: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).primary,
-                  width: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
-                  width: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              contentPadding:
-                  const EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 14.0),
-            ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
+        child: TextFormField(
+          controller: widget.textEditingController,
+          focusNode: _model.ansFieldFocusNode,
+          onChanged: (_) => EasyDebounce.debounce(
+            'widget.textEditingController',
+            const Duration(milliseconds: 0),
+            () async {
+              FFAppState().updateAnsListAtIndex(
+                widget.idx!,
+                (_) => widget.textEditingController.text,
+              ); 
+            },
+          ),
+          autofocus: true,
+          obscureText: false,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
+            isDense: true,
+            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                   fontFamily: 'DM Sans',
-                  fontSize: 14.0,
                   letterSpacing: 0.0,
                 ),
-            textAlign: TextAlign.center,
-            maxLength: 1,
-            maxLengthEnforcement: MaxLengthEnforcement.enforced,
-            buildCounter: (context,
-                    {required currentLength, required isFocused, maxLength}) =>
-                null,
-            keyboardType: TextInputType.number,
-            validator:
-                _model.ansFieldTextControllerValidator.asValidator(context),
+            hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                  fontFamily: 'DM Sans',
+                  letterSpacing: 0.0,
+                ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: FlutterFlowTheme.of(context).primaryText,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: FlutterFlowTheme.of(context).primary,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: FlutterFlowTheme.of(context).error,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: FlutterFlowTheme.of(context).error,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(0.0),
+            ),
           ),
+          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                fontFamily: 'DM Sans',
+                fontSize: 14.0,
+                letterSpacing: 0.0,
+              ),
+          textAlign: TextAlign.center,
+          maxLength: 1,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          buildCounter: (context,
+                  {required currentLength, required isFocused, maxLength}) =>
+              null,
+          keyboardType: TextInputType.number,
+          
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return '';
+            }
+            return null;
+          }
+              // _model.ansFieldTextControllerValidator.asValidator(context),
         ),
       ),
     );

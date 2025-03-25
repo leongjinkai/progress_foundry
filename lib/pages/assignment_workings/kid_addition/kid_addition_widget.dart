@@ -838,6 +838,10 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             FFButtonWidget(
                                                                           onPressed:
                                                                               () async {
+
+                                                                            if (!_formKey.currentState!.validate()) {
+                                                                              return;
+                                                                            }
                                                                             var shouldSetState =
                                                                                 false;
                                                                                                                     
