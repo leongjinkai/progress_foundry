@@ -193,77 +193,79 @@ class _KidsPerfectWidgetState extends State<KidsPerfectWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    decoration: const BoxDecoration(),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/medal.gif',
-                        height: 486.0,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 30.0),
-                    child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: const BoxDecoration(),
-                      alignment: const AlignmentDirectional(0.0, 30.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/star.gif',
-                          width: 534.0,
-                          height: 164.0,
+                          'assets/images/medal.gif',
+                          height: 486.0,
                           fit: BoxFit.contain,
-                          alignment: const Alignment(0.0, -10.0),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 6.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    context.pushNamed('KidsHome');
-                  },
-                  text: 'Finish',
-                  options: FFButtonOptions(
-                    width: 136.0,
-                    height: 38.0,
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'DM Sans',
-                          color: Colors.white,
-                          letterSpacing: 0.0,
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 30.0),
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        decoration: const BoxDecoration(),
+                        alignment: const AlignmentDirectional(0.0, 30.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/star.gif',
+                            width: 534.0,
+                            height: 164.0,
+                            fit: BoxFit.contain,
+                            alignment: const Alignment(0.0, -10.0),
+                          ),
                         ),
-                    elevation: 3.0,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(16.0),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 6.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('KidsHome');
+                    },
+                    text: 'Finish',
+                    options: FFButtonOptions(
+                      width: 136.0,
+                      height: 38.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily: 'DM Sans',
+                            color: Colors.white,
+                            letterSpacing: 0.0,
+                          ),
+                      elevation: 3.0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
                   ),
                 ),
-              ),
-            ]
-                .divide(const SizedBox(height: 17.0))
-                .addToStart(const SizedBox(height: 48.0))
-                .addToEnd(const SizedBox(height: 72.0)),
+              ]
+                  .divide(const SizedBox(height: 17.0))
+                  .addToStart(const SizedBox(height: 48.0))
+                  .addToEnd(const SizedBox(height: 72.0)),
+            ),
           ),
         ),
       ),
