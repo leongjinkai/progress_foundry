@@ -10,6 +10,7 @@ class StudentAssignmentStruct extends BaseStruct {
     String? assignmentName,
     String? studentId,
     double? completionRate,
+    double? score,
     String? createdAt,
     String? dueDate,
     String? questionSubject,
@@ -23,6 +24,7 @@ class StudentAssignmentStruct extends BaseStruct {
         _assignmentName = assignmentName,
         _studentId = studentId,
         _completionRate = completionRate,
+        _score = score,
         _createdAt = createdAt,
         _dueDate = dueDate,
         _questionSubject = questionSubject,
@@ -63,6 +65,13 @@ class StudentAssignmentStruct extends BaseStruct {
       completionRate = completionRate + amount;
 
   bool hasCompletionRate() => _completionRate != null;
+
+  // "score" field.
+  double? _score;
+  double get score => _score ?? 0.0;
+  set score(double? val) => _score = val;
+
+  bool hasScore() => _score != null;
 
   // "createdAt" field.
   String? _createdAt;
@@ -140,6 +149,7 @@ class StudentAssignmentStruct extends BaseStruct {
         assignmentName: data['assignmentName'] as String?,
         studentId: data['studentId'] as String?,
         completionRate: castToType<double>(data['completionRate']),
+        score: castToType<double>(data['score']),
         createdAt: data['createdAt'] as String?,
         dueDate: data['dueDate'] as String?,
         questionSubject: data['questionSubject'] as String?,
@@ -163,6 +173,7 @@ class StudentAssignmentStruct extends BaseStruct {
         'assignmentName': _assignmentName,
         'studentId': _studentId,
         'completionRate': _completionRate,
+        'score': _score,
         'createdAt': _createdAt,
         'dueDate': _dueDate,
         'questionSubject': _questionSubject,
@@ -191,6 +202,10 @@ class StudentAssignmentStruct extends BaseStruct {
         ),
         'completionRate': serializeParam(
           _completionRate,
+          ParamType.double,
+        ),
+        'score': serializeParam(
+          _score,
           ParamType.double,
         ),
         'createdAt': serializeParam(
@@ -255,6 +270,11 @@ class StudentAssignmentStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
+        score: deserializeParam(
+          data['score'],
+          ParamType.double,
+          false,
+        ),
         createdAt: deserializeParam(
           data['createdAt'],
           ParamType.String,
@@ -315,6 +335,7 @@ class StudentAssignmentStruct extends BaseStruct {
         assignmentName == other.assignmentName &&
         studentId == other.studentId &&
         completionRate == other.completionRate &&
+        score == other.score &&
         createdAt == other.createdAt &&
         dueDate == other.dueDate &&
         questionSubject == other.questionSubject &&
@@ -333,6 +354,7 @@ class StudentAssignmentStruct extends BaseStruct {
         assignmentName,
         studentId,
         completionRate,
+        score,
         createdAt,
         dueDate,
         questionSubject,
@@ -350,6 +372,7 @@ StudentAssignmentStruct createStudentAssignmentStruct({
   String? assignmentName,
   String? studentId,
   double? completionRate,
+  double? score,
   String? createdAt,
   String? dueDate,
   String? questionSubject,
@@ -364,6 +387,7 @@ StudentAssignmentStruct createStudentAssignmentStruct({
       assignmentName: assignmentName,
       studentId: studentId,
       completionRate: completionRate,
+      score: score,
       createdAt: createdAt,
       dueDate: dueDate,
       questionSubject: questionSubject,

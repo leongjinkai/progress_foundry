@@ -846,7 +846,11 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                 false;
                                                                                                                     
                                                                             var listDigits = FFAppState().newSelectedQnDetail.question.replaceAll(" ", "").split(FFAppState().newSelectedQnDetail.questionTopic == "ADDITION" ? "+" : "-").map((element) => element.replaceAll("=", "")).toList();
-                                                                            var carryOver = int.parse(FFAppState().carryOverList.join().replaceAll("", "0"));
+                                                                            var carrOverJoined = FFAppState().carryOverList.join();
+                                                                            var carryOver = 0;
+                                                                            if (carrOverJoined != "") {
+                                                                              carryOver = int.parse(carrOverJoined);
+                                                                            }
         
                                                                             // Call Attempt API
                                                                             _model.assignmentResponse = await LiveQuestionManagementGroup
@@ -904,6 +908,14 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                   );
                                                                                 },
                                                                               );
+
+                                                                               // Next Question
+                                                                              if (FFAppState().selectedQuestion < FFAppState().newQuestionList.length) {
+                                                                                 FFAppState().selectedQuestion =
+                                                                                  FFAppState().selectedQuestion + 1;
+                                                                              safeSetState(
+                                                                                  () {});
+                                                                              }
                                                                             } else {
                                                                               // Wrong answer
                                                                               setState(() {
@@ -915,10 +927,8 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                 builder:
                                                                                     (alertDialogContext) {
                                                                                   return AlertDialog(
-                                                                                    title: const Text('Wrong'),
-                                                                                    content: Text((List<String> var1) {
-                                                                                      return var1.join("");
-                                                                                    }(FFAppState().ansList.toList())),
+                                                                                    title: const Text('Wrong Answer'),
+                                                                                    content: const Text("Try Again! You can do it!"),
                                                                                     actions: [
                                                                                       TextButton(
                                                                                         onPressed: () => Navigator.pop(alertDialogContext),
@@ -940,7 +950,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                   .newQuestionList = unsortedQnList;
                                                                               safeSetState(
                                                                                   () {});                                                                                                       
-                                                                            if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.completionRate ==
+                                                                            if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ''))?.score ==
                                                                                 1.0) {
                                                                               context
                                                                                   .pushNamed('KidsPerfect');
@@ -959,12 +969,6 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                 safeSetState(() {});
                                                                               }
                                                                               return;
-                                                                            } else {
-                                                                              // Next Question
-                                                                              FFAppState().selectedQuestion =
-                                                                                  FFAppState().selectedQuestion + 1;
-                                                                              safeSetState(
-                                                                                  () {});
                                                                             }
                                                                             _model.updatePage(
                                                                                 () {});

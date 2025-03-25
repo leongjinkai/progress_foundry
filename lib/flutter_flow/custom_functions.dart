@@ -158,11 +158,11 @@ List<String> getCarryOverNumList(String qnLevel) {
 List<String> getAdditionAnsLength(String qnLevel) {
   switch (qnLevel) {
     case "SINGLE_DIGIT":
-      return ["1", "1"];
+      return ["", ""];
     case "DOUBLE_DIGIT":
-      return ["1", "1", "1"];
+      return ["", "", ""];
     default:
-      return ["1"];
+      return [""];
   }
 }
 
