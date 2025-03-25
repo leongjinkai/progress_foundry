@@ -11,10 +11,14 @@ class QuestionBubbleNewWidget extends StatefulWidget {
     super.key,
     this.questionNumber,
     required this.questionAttempt,
+    this.ansControllers,
+    this.coControllers
   });
 
   final int? questionNumber;
   final AssignmentResponseDTOStruct? questionAttempt;
+  final Map<int, TextEditingController>? ansControllers;
+  final Map<int, TextEditingController>? coControllers;
 
   @override
   State<QuestionBubbleNewWidget> createState() =>
@@ -58,6 +62,16 @@ class _QuestionBubbleNewWidgetState extends State<QuestionBubbleNewWidget> {
         highlightColor: Colors.transparent,
         onTap: () async {
           FFAppState().selectedQuestion = widget.questionNumber!;
+          if (widget.ansControllers != null) {
+            for (var v in widget.ansControllers!.values) {
+              v.clear();
+            }
+          }
+          if (widget.coControllers != null) {
+            for (var x in widget.coControllers!.values) {
+              x.clear();
+            }
+          }
           safeSetState(() {});
           FFAppState().newSelectedQnDetail = FFAppState()
               .newQuestionList

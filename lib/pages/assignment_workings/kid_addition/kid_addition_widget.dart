@@ -210,6 +210,8 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                   ),
                                                   questionNumber: questionIndex + 1,
                                                   questionAttempt: questionItem,
+                                                  ansControllers: ansControllers,
+                                                  coControllers: coControllers,
                                                 ),
                                               );
                                             },
