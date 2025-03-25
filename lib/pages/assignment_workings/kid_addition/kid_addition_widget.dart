@@ -857,8 +857,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                                   .id.toString(),
                                                                               answer: (List<String>
                                                                                   ansList) {
-                                                                                return ansList.join().replaceAll("",
-                                                                                    "0");
+                                                                                return ansList.join();
                                                                               }(FFAppState()
                                                                                   .ansList
                                                                                   .toList()),
@@ -1154,7 +1153,7 @@ class AddSubAnsFields extends StatefulWidget {
     super.key,
     required KidAdditionModel model,
     required this.safeSetState,
-    required this.controllers
+    required this.controllers,
   }) : _model = model;
 
   final KidAdditionModel _model;
@@ -1205,6 +1204,7 @@ class AddSubAnsFieldsState extends State<AddSubAnsFields> {
                 inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
                 idx: numAnswersIndex,
                 textEditingController: controller,
+                ansControllers: widget.controllers
               ),
               updateOnChange: true
             );

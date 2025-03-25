@@ -13,12 +13,14 @@ class GeneratedAnsFieldWidget extends StatefulWidget {
     super.key,
     required this.inputValue,
     required this.idx,
-    required this.textEditingController
+    required this.textEditingController,
+    required this.ansControllers
   });
 
   final String? inputValue;
   final int? idx;
   final TextEditingController textEditingController;
+  final Map<int, TextEditingController> ansControllers;
 
   @override
   State<GeneratedAnsFieldWidget> createState() =>
@@ -137,9 +139,12 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
           keyboardType: TextInputType.number,
           
           validator: (value) {
-            if (value == null || value.isEmpty) {
+            // if any of the text input fields to my left is filled and I am empty, return ""
+          for (final mapEntry in widget.ansControllers.entries) {
+            if (mapEntry.key < widget.idx! && mapEntry.value.text.isNotEmpty && (value!.isEmpty)) {
               return '';
             }
+          } 
             return null;
           }
               // _model.ansFieldTextControllerValidator.asValidator(context),
