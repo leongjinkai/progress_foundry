@@ -749,7 +749,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             // Change qn detail
                                                                             FFAppState().newSelectedQnDetail = FFAppState()
                                                                                 .newQuestionList
-                                                                                .elementAtOrNull(FFAppState().selectedQuestion +
+                                                                                .elementAtOrNull(FFAppState().selectedQuestion -
                                                                                     1)!
                                                                                 .questionResponseDTO;
                                                                             safeSetState(
@@ -757,6 +757,15 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             // Clear ansList
                                                                             FFAppState().ansList =
                                                                                 [];
+                                                                            // Reset Answer Input
+                                                                              FFAppState()
+                                                                                  .ansList = getAdditionAnsLength(FFAppState().newQuestionList.firstOrNull!.questionResponseDTO.questionLevel);
+                                                                            for (var v in ansControllers.values) {
+                                                                              v.clear();
+                                                                            }
+                                                                            for (var x in coControllers.values) {
+                                                                              x.clear();
+                                                                            }
                                                                             _model.updatePage(
                                                                                 () {});
                                                                             await Future.delayed(const Duration(
