@@ -86,6 +86,9 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
         // New Set Selected QN Detail
         FFAppState().newSelectedQnDetail = unsortedQnList.firstOrNull!.questionResponseDTO;
         safeSetState(() {});
+        // Set SelectedQuestion back to 1
+        FFAppState().selectedQuestion = 1;
+        safeSetState(() {});
         // Set Loading False
         FFAppState().isLoading = false;
         safeSetState(() {});
