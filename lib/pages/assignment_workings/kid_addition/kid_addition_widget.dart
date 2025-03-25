@@ -440,7 +440,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                               0.0,
                                                                               0.0,
                                                                               0.0,
-                                                                              55.0),
+                                                                              74.0),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1186,6 +1186,7 @@ class AddSubAnsFieldsState extends State<AddSubAnsFields> {
         return Row(
           mainAxisAlignment:
               MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
           children: List.generate(
               numAnswers.length,
               (numAnswersIndex) {
