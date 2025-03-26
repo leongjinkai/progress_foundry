@@ -1,3 +1,5 @@
-cp server/server.py build/web/
-cd build/web/ || exit
+#!/bin/bash
+
+
+cd /app/server || exit
 python3 server.py
