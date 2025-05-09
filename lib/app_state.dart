@@ -166,6 +166,19 @@ class FFAppState extends ChangeNotifier {
     ansList[index] = updateFn(_ansList[index]);
   }
 
+  List<String> _secondaryAnsList = ["", ""];
+  List<String> get secondaryAnsList => _secondaryAnsList;
+  set secondaryAnsList(List<String> value) {
+    _secondaryAnsList = value;
+  }
+
+  void updateSecondaryAnsListAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    secondaryAnsList[index] = updateFn(_secondaryAnsList[index]);
+  }
+
   List<String> _carryOverList = ['', '', '', ''];
   List<String> get carryOverList => _carryOverList;
 

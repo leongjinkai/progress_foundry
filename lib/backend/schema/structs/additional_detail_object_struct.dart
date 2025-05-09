@@ -7,18 +7,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 class AdditionalDetailObjectStruct extends BaseStruct {
   AdditionalDetailObjectStruct({
     String? mathOperation,
-    List<MathStepStruct>? mathSteps,
+    List<dynamic>? mathSteps,
   }) : 
     _mathSteps = mathSteps,
     _mathOperation = mathOperation;
 
   // "mathSteps" field.
-  List<MathStepStruct>? _mathSteps;
-  List<MathStepStruct> get mathSteps =>
+  List<dynamic>? _mathSteps;
+  List<dynamic> get mathSteps =>
       _mathSteps ?? [];
-  set mathSteps(List<MathStepStruct>? val) => _mathSteps = val;
+  set mathSteps(List<dynamic>? val) => _mathSteps = val;
 
-  void updateMathSteps(Function(List<MathStepStruct>) updateFn) {
+  void updateMathSteps(Function(List<dynamic>) updateFn) {
     updateFn(_mathSteps ??= []);
   }
 
@@ -49,7 +49,7 @@ class AdditionalDetailObjectStruct extends BaseStruct {
 
   Map<String, dynamic> toMap() => {
         'mathOperation': _mathOperation,
-        'mathSteps': _mathSteps?.map((e) => e.toMap()).toList(),
+        'mathSteps': _mathSteps?.toList(),
       }.withoutNulls;
 
   @override

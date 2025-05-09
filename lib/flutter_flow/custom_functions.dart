@@ -100,8 +100,14 @@ List<String> getAnsNumList(NormalQuestionStruct questionDetail) {
 String? getAssigmentCardContentHeader(
   String qnTopic,
   String qnLevel,
+  String qnType
 ) {
   var topicText = "";
+
+  if (qnType == "LONG_ANSWER") {
+    return "Word Problems";
+  }
+
   switch (qnTopic) {
     case "ADDITION":
       topicText = "Adding to ";

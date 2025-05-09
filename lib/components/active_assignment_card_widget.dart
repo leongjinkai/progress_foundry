@@ -14,6 +14,7 @@ class ActiveAssignmentCardWidget extends StatefulWidget {
     required this.qnTopicParam,
     required this.qnLevelParam,
     required this.completionRateParam,
+    required this.qnType,
     this.assignmentId,
     required this.qnTopic,
   });
@@ -24,6 +25,7 @@ class ActiveAssignmentCardWidget extends StatefulWidget {
   final double? completionRateParam;
   final String? assignmentId;
   final String? qnTopic;
+  final String? qnType;
 
   @override
   State<ActiveAssignmentCardWidget> createState() =>
@@ -89,7 +91,7 @@ class _ActiveAssignmentCardWidgetState
                 Text(
                   valueOrDefault<String>(
                     functions.getAssigmentCardContentHeader(
-                        widget.qnTopicParam!, widget.qnLevelParam!),
+                        widget.qnTopicParam!, widget.qnLevelParam!, widget.qnType!),
                     '?',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -104,6 +106,20 @@ class _ActiveAssignmentCardWidgetState
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 6.0),
                   child: FFButtonWidget(
                     onPressed: () async {
+                      if (widget.qnType == "LONG_ANSWER") {
+                         context.pushNamed(
+                              'KidWordProblem',
+                              queryParameters: {
+                                'assignmentId': serializeParam(
+                                  widget.assignmentId,
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+
+                            return;
+                      }
+
                       if (widget.qnTopic == 'ADDITION' || widget.qnTopic == "SUBTRACTION") {
                         context.pushNamed(
                           'KidAddition',

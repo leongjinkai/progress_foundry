@@ -14,13 +14,15 @@ class GeneratedAnsFieldWidget extends StatefulWidget {
     required this.inputValue,
     required this.idx,
     required this.textEditingController,
-    required this.ansControllers
+    required this.ansControllers,
+    required this.updateFn
   });
 
   final String? inputValue;
   final int? idx;
   final TextEditingController textEditingController;
   final Map<int, TextEditingController> ansControllers;
+  final Function updateFn;
 
   @override
   State<GeneratedAnsFieldWidget> createState() =>
@@ -29,6 +31,7 @@ class GeneratedAnsFieldWidget extends StatefulWidget {
 
 class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
   late GeneratedAnsFieldModel _model;
+  late FocusNode _focusNode;
 
   @override
   void setState(VoidCallback callback) {
@@ -49,7 +52,7 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
     });
 
     _model.ansFieldTextController ??= TextEditingController();
-    _model.ansFieldFocusNode ??= FocusNode();
+    _focusNode = FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -57,7 +60,7 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
   @override
   void dispose() {
     _model.maybeDispose();
-
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -72,15 +75,13 @@ class _GeneratedAnsFieldWidgetState extends State<GeneratedAnsFieldWidget> {
         alignment: const AlignmentDirectional(0.0, 0.0),
         child: TextFormField(
           controller: widget.textEditingController,
-          focusNode: _model.ansFieldFocusNode,
+          focusNode: _focusNode,
           onChanged: (_) => EasyDebounce.debounce(
             'widget.textEditingController',
             const Duration(milliseconds: 0),
             () async {
-              FFAppState().updateAnsListAtIndex(
-                widget.idx!,
-                (_) => widget.textEditingController.text,
-              ); 
+              widget.updateFn(widget.idx!,
+                (_) => widget.textEditingController.text);
             },
           ),
           autofocus: true,

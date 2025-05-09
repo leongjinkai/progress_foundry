@@ -75,7 +75,7 @@ class _AssignmentCardWidgetState extends State<AssignmentCardWidget> {
                       valueOrDefault<String>(
                         functions.getAssigmentCardContentHeader(
                             widget.assignment!.questionTopic,
-                            widget.assignment!.questionLevel),
+                            widget.assignment!.questionLevel, widget.assignment!.questionType),
                         '?',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(

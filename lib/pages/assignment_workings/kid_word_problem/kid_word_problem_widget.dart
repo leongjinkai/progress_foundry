@@ -1,3 +1,10 @@
+import 'dart:collection';
+
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
+import 'package:progress_foundry/components/generated_ans_field_widget.dart';
+import 'package:progress_foundry/components/generated_c_o_field_widget.dart';
+import 'package:progress_foundry/components/generated_qn_field_widget.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loading_widget.dart';
@@ -14,6 +21,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'kid_word_problem_model.dart';
 export 'kid_word_problem_model.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 class KidWordProblemWidget extends StatefulWidget {
   const KidWordProblemWidget({
@@ -28,7 +36,14 @@ class KidWordProblemWidget extends StatefulWidget {
 }
 
 class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
+  final Map<int,TextEditingController> controllers = HashMap.from({0: TextEditingController(), 1: TextEditingController()});
+  Map<int,TextEditingController> ansControllers = {};
+  Map<int,TextEditingController> firstAddControllers = {};
+  Map<int,TextEditingController> secondAddControllers = {};
+  Map<int,TextEditingController> coControllers = {};
+  String complexQuestion = "";
   late KidWordProblemModel _model;
+  String showFeedback = "";
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -50,12 +65,18 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
               (_model.responseQuestionList?.jsonBody ?? ''))!
           .assignmentQuestionResponseDTOList
           .isNotEmpty) {
-        // New Set Selected QN Detail
-        FFAppState().newSelectedQnDetail = StudentAssignmentStruct.maybeFromMap(
+        List<AssignmentResponseDTOStruct> unsortedQnList = StudentAssignmentStruct.maybeFromMap(
                 (_model.responseQuestionList?.jsonBody ?? ''))!
             .assignmentQuestionResponseDTOList
-            .firstOrNull!
-            .questionResponseDTO;
+            .toList()
+            .cast<AssignmentResponseDTOStruct>();
+        unsortedQnList.sort((a, b) => a.questionResponseDTO.id.compareTo(b.questionResponseDTO.id));
+        FFAppState().newQuestionList = unsortedQnList;
+        // Set ansList
+        FFAppState().ansList = ["", ""];
+        safeSetState(() {});
+        // New Set Selected QN Detail
+        FFAppState().newSelectedQnDetail = unsortedQnList.firstOrNull!.questionResponseDTO;
         safeSetState(() {});
         // Set Loading False
         FFAppState().isLoading = false;
@@ -66,6 +87,12 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
             .toList()
             .cast<AssignmentResponseDTOStruct>();
         safeSetState(() {});
+        FFAppState().secondaryAnsList = ["", ""];
+
+        setState(() {
+          complexQuestion = FFAppState().newQuestionList[0].questionResponseDTO.question;
+        });
+        safeSetState(() {});
         _model.timerController.onStartTimer();
         return;
       } else {
@@ -73,7 +100,6 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -180,81 +206,78 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.8,
-                              height: MediaQuery.sizeOf(context).height * 1.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                child: Stack(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  children: [
-                                    if (FFAppState().bgImg == 'bgOne')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_one.png',
-                                            ).image,
+                            child: SingleChildScrollView(
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.8,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: SizedBox(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  child: Stack(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    children: [
+                                      if (FFAppState().bgImg == 'bgOne')
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_one.png',
+                                              ).image,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    if (FFAppState().bgImg == 'bgTwo')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_two.png',
-                                            ).image,
+                                      if (FFAppState().bgImg == 'bgTwo')
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_two.png',
+                                              ).image,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    if (FFAppState().bgImg == 'bgThree')
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: Image.asset(
-                                              'assets/images/bg_three.png',
-                                            ).image,
+                                      if (FFAppState().bgImg == 'bgThree')
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height:
+                                              MediaQuery.sizeOf(context).height *
+                                                  1.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: Image.asset(
+                                                'assets/images/bg_three.png',
+                                              ).image,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                      Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 100.0, 0.0, 100.0),
+                                                    0.0, 50.0, 0.0, 100.0),
                                             child: Container(
                                               width: 800.0,
                                               decoration: BoxDecoration(
@@ -414,7 +437,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     0.0,
                                                                     50.0),
                                                         child: Text(
-                                                          'John and Keith had an equal number of marbles at first.  After John gave away 54 marbles and Keith gave away 18 marbles, the ratio of John’s marbles to Keith’s marbles was 3:4.  How many marbles did John have at first?',
+                                                          FFAppState().newSelectedQnDetail.question,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -426,95 +449,95 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                               ),
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    16.0),
-                                                        child: Container(
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .width *
-                                                                  1.0,
-                                                          height: 600.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20.0),
-                                                            border: Border.all(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets.all(
-                                                                    25.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Draw your model here',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Poppins',
-                                                                            color:
-                                                                                const Color(0xFF525F7F),
-                                                                            fontSize:
-                                                                                19.0,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            lineHeight:
-                                                                                1.5,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  width: MediaQuery.sizeOf(
-                                                                              context)
-                                                                          .width *
-                                                                      1.0,
-                                                                  height: 500.0,
-                                                                  child: custom_widgets
-                                                                      .DrawingCanvas(
-                                                                    width: MediaQuery.sizeOf(context)
-                                                                            .width *
-                                                                        1.0,
-                                                                    height:
-                                                                        500.0,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsetsDirectional
+                                                      //           .fromSTEB(
+                                                      //               0.0,
+                                                      //               0.0,
+                                                      //               0.0,
+                                                      //               16.0),
+                                                      //   child: Container(
+                                                      //     width:
+                                                      //         MediaQuery.sizeOf(
+                                                      //                     context)
+                                                      //                 .width *
+                                                      //             1.0,
+                                                      //     height: 600.0,
+                                                      //     decoration:
+                                                      //         BoxDecoration(
+                                                      //       color: FlutterFlowTheme
+                                                      //               .of(context)
+                                                      //           .secondaryBackground,
+                                                      //       borderRadius:
+                                                      //           BorderRadius
+                                                      //               .circular(
+                                                      //                   20.0),
+                                                      //       border: Border.all(
+                                                      //         color: FlutterFlowTheme
+                                                      //                 .of(context)
+                                                      //             .primaryText,
+                                                      //       ),
+                                                      //     ),
+                                                      //     child: Padding(
+                                                      //       padding:
+                                                      //           const EdgeInsets.all(
+                                                      //               25.0),
+                                                      //       child: Column(
+                                                      //         mainAxisSize:
+                                                      //             MainAxisSize
+                                                      //                 .max,
+                                                      //         children: [
+                                                      //           Row(
+                                                      //             mainAxisSize:
+                                                      //                 MainAxisSize
+                                                      //                     .max,
+                                                      //             mainAxisAlignment:
+                                                      //                 MainAxisAlignment
+                                                      //                     .spaceBetween,
+                                                      //             children: [
+                                                      //               Text(
+                                                      //                 'Draw your model here',
+                                                      //                 style: FlutterFlowTheme.of(
+                                                      //                         context)
+                                                      //                     .bodyMedium
+                                                      //                     .override(
+                                                      //                       fontFamily:
+                                                      //                           'Poppins',
+                                                      //                       color:
+                                                      //                           const Color(0xFF525F7F),
+                                                      //                       fontSize:
+                                                      //                           19.0,
+                                                      //                       letterSpacing:
+                                                      //                           0.0,
+                                                      //                       fontWeight:
+                                                      //                           FontWeight.w600,
+                                                      //                       lineHeight:
+                                                      //                           1.5,
+                                                      //                     ),
+                                                      //               ),
+                                                      //             ],
+                                                      //           ),
+                                                      //           SizedBox(
+                                                      //             width: MediaQuery.sizeOf(
+                                                      //                         context)
+                                                      //                     .width *
+                                                      //                 1.0,
+                                                      //             height: 500.0,
+                                                      //             child: custom_widgets
+                                                      //                 .DrawingCanvas(
+                                                      //               width: MediaQuery.sizeOf(context)
+                                                      //                       .width *
+                                                      //                   1.0,
+                                                      //               height:
+                                                      //                   500.0,
+                                                      //             ),
+                                                      //           ),
+                                                      //         ],
+                                                      //       ),
+                                                      //     ),
+                                                      //   ),
+                                                      // ),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
@@ -582,12 +605,45 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                           .width *
                                                                       1.0,
                                                                   height: 100.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
+                                                                  child: Wrap(
+                                                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                                                    spacing: 20,
+                                                                    children: [
+                                                                    const Text("Sally has"),
+                                                                    GeneratedAnsFieldWidget(
+                                                                      key: const Key(
+                                                                        'Keyfh0_1',
+                                                                      ),
+                                                                      inputValue: FFAppState().secondaryAnsList.elementAtOrNull(0)!,
+                                                                      idx: 0,
+                                                                      textEditingController: controllers[0]!,
+                                                                      ansControllers: controllers,
+                                                                      updateFn: FFAppState().updateSecondaryAnsListAtIndex,
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<String>(
+                                                                        functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
+                                                                        '?',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                            fontFamily: 'DM Sans',
+                                                                            fontSize: 32.0,
+                                                                            letterSpacing: 0.0,
+                                                                            lineHeight: 1.5,
+                                                                          ),
+                                                                    ),
+                                                                    GeneratedAnsFieldWidget(
+                                                                      key: const Key(
+                                                                        'Keyfh0_2',
+                                                                      ),
+                                                                      inputValue: FFAppState().secondaryAnsList.elementAtOrNull(1)!,
+                                                                      idx: 0,
+                                                                      textEditingController: controllers[1]!,
+                                                                      ansControllers: controllers,
+                                                                      updateFn: FFAppState().updateSecondaryAnsListAtIndex
+                                                                    ),
+                                                                    const Text("apples.")
+                                                                    ],),
                                                                 ),
                                                               ].divide(const SizedBox(
                                                                   height:
@@ -605,6 +661,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     0.0,
                                                                     16.0),
                                                         child: Container(
+                                                          height: 400,
                                                           width:
                                                               MediaQuery.sizeOf(
                                                                           context)
@@ -630,9 +687,6 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                 const EdgeInsets.all(
                                                                     25.0),
                                                             child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
@@ -657,19 +711,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                             1.5,
                                                                       ),
                                                                 ),
-                                                                Container(
-                                                                  width: MediaQuery.sizeOf(
-                                                                              context)
-                                                                          .width *
-                                                                      1.0,
-                                                                  height: 100.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                  ),
-                                                                ),
+                                                                AdditionWorking(coControllers: coControllers, model: _model, ansControllers: ansControllers, firstAddControllers: firstAddControllers, secondAddControllers: secondAddControllers, safeSetState: safeSetState),
                                                               ].divide(const SizedBox(
                                                                   height:
                                                                       20.0)),
@@ -741,7 +783,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                   _model
                                                                       .timerController
                                                                       .onResetTimer();
-
+                                      
                                                                   _model
                                                                       .timerController
                                                                       .onStartTimer();
@@ -816,6 +858,12 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     () async {
                                                                   var shouldSetState =
                                                                       false;
+
+                                                                  List<String> qnPrompts = List<String>.from(FFAppState().newSelectedQnDetail.prompts);
+                                                                  Map<String, int> mathSteps = {};
+                                                                  List<int> answers = [0, 1, 2];
+                                                                  qnPrompts.mapIndexed((int idx, String prompt) => mathSteps[prompt] = answers[idx]);
+
                                                                   // Call Attempt API
                                                                   _model.assignmentResponse =
                                                                       await LiveQuestionManagementGroup
@@ -829,10 +877,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                             String>
                                                                         ansList) {
                                                                       return ansList
-                                                                          .join()
-                                                                          .replaceAll(
-                                                                              "a",
-                                                                              "");
+                                                                          .join();
                                                                     }(FFAppState()
                                                                         .ansList
                                                                         .toList()),
@@ -842,11 +887,15 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     assignmentId:
                                                                         widget
                                                                             .assignmentId,
+                                                                    additionalDetailsJson: [AdditionalDetailObjectStruct(
+                                                                                mathOperation: FFAppState().newSelectedQnDetail.questionType.toLowerCase(),
+                                                                                mathSteps: [mathSteps]
+                                                                              ).toMap()],
                                                                   );
-
+                                      
                                                                   shouldSetState =
                                                                       true;
-                                                                  if (StudentAssignmentStruct.maybeFromMap((_model
+                                                                  bool isCorrect = StudentAssignmentStruct.maybeFromMap((_model
                                                                               .assignmentResponse
                                                                               ?.jsonBody ??
                                                                           ''))!
@@ -860,7 +909,8 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                       .toList()
                                                                       .firstOrNull!
                                                                       .normalQuestionAttemptResponseDTO
-                                                                      .isCorrect) {
+                                                                      .isCorrect;
+                                                                  if (isCorrect) {
                                                                     // Correct Answer
                                                                     await showDialog(
                                                                       context:
@@ -883,38 +933,36 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     );
                                                                   } else {
                                                                     // Wrong answer
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              const Text('Wrong'),
-                                                                          content: Text((List<String>
-                                                                              var1) {
-                                                                            return var1.join("");
-                                                                          }(FFAppState()
-                                                                              .ansList
-                                                                              .toList())),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext),
-                                                                              child: const Text('Ok'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    );
+                                                                      await showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (alertDialogContext) {
+                                                                          return AlertDialog(
+                                                                            title: const Text('Wrong Answer'),
+                                                                            content: const Text("Try Again! You can do it!"),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                child: const Text('Ok'),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        },
+                                                                      );
                                                                   }
 
+                                                                  setState(() {
+                                                                    showFeedback = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ?? ""))!.feedback;
+                                                                  });
+                                      
                                                                   if (StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
                                                                               ''))
                                                                           ?.completionRate ==
                                                                       1.0) {
                                                                     context.pushNamed(
                                                                         'KidsPerfect');
-
+                                      
                                                                     // Remove Ans Length
                                                                     FFAppState()
                                                                         .ansLength = [];
@@ -937,7 +985,19 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                           () {});
                                                                     }
                                                                     return;
-                                                                  } else {
+                                                                  } else if (FFAppState().selectedQuestion == FFAppState().newQuestionList.length) {
+                                                                    FFAppState()
+                                                                        .newQuestionList = StudentAssignmentStruct.maybeFromMap((_model.assignmentResponse?.jsonBody ??
+                                                                            ''))!
+                                                                        .assignmentQuestionResponseDTOList
+                                                                        .toList()
+                                                                        .cast<
+                                                                            AssignmentResponseDTOStruct>();
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  }
+                                                                  
+                                                                   else {
                                                                     // Next Question
                                                                     FFAppState()
                                                                             .selectedQuestion =
@@ -956,7 +1016,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                     safeSetState(
                                                                         () {});
                                                                   }
-
+                                      
                                                                   // Clear ansList
                                                                   FFAppState()
                                                                       .ansList = [];
@@ -990,7 +1050,7 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                                                   _model
                                                                       .timerController
                                                                       .onResetTimer();
-
+                                      
                                                                   // Start Timer
                                                                   _model
                                                                       .timerController
@@ -1057,8 +1117,65 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        height: MediaQuery.sizeOf(context).height * 0.8,
+                                        width: MediaQuery.sizeOf(context).width * 0.8,
+                                        child: Stack(
+                                          alignment: Alignment.centerRight,
+                                          children: [
+                                            Positioned(
+                                              right: 0,
+                                              child: SizedBox(
+                                                width: 240,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Builder(
+                                                      builder: (context) {
+                                                        if (showFeedback.isNotEmpty) {
+                                                          return Align(
+                                                            alignment: Alignment.bottomLeft,
+                                                            // width: 240,
+                                                            child: BubbleSpecialThree(
+                                                              isSender: false,
+                                                              text: showFeedback,
+                                                              color: const Color(0xFFE8E8EE),
+                                                              tail: true,
+                                                              textStyle:  FlutterFlowTheme.of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: 'Poppins',
+                                                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                                                  fontSize: 14.0,
+                                                                  letterSpacing: 0.0,
+                                                                  lineHeight: 1.5,
+                                                                )
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          return Container();
+                                                        }
+                                                    }),
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(8.0),
+                                                      child: Image.asset(
+                                                        'assets/images/Stand_up_2.gif',
+                                                        width: 183.0,
+                                                        height: 183.0,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -1078,6 +1195,335 @@ class _KidWordProblemWidgetState extends State<KidWordProblemWidget> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AdditionWorking extends StatelessWidget {
+  const AdditionWorking({
+    super.key,
+    required this.coControllers,
+    required KidWordProblemModel model,
+    required this.ansControllers,
+    required this.firstAddControllers,
+    required this.secondAddControllers,
+    required this.safeSetState
+  }) : _model = model;
+
+  final Map<int, TextEditingController> coControllers;
+  final KidWordProblemModel _model;
+  final Map<int, TextEditingController> ansControllers;
+  final Map<int, TextEditingController> firstAddControllers;
+  final Map<int, TextEditingController> secondAddControllers;
+  final Function(Function()) safeSetState;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 100.0,
+        decoration:
+            BoxDecoration(
+          color: FlutterFlowTheme.of(
+                  context)
+              .secondaryBackground,
+        ),
+        child: Column(
+          mainAxisSize:
+              MainAxisSize
+                  .min,
+          children: [
+            Column(
+              mainAxisSize:
+                  MainAxisSize
+                      .max,
+              mainAxisAlignment:
+                  MainAxisAlignment
+                      .start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height:
+                      145.0,
+                  decoration:
+                      BoxDecoration(
+                    color:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child:
+                      Row(
+                    mainAxisSize:
+                        MainAxisSize.max,
+                    mainAxisAlignment:
+                        MainAxisAlignment.end,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.end,
+                    children:
+                        [
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 1.4),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
+                              '?',
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'DM Sans',
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  lineHeight: 1.5,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Container(
+                          height: MediaQuery.sizeOf(context).height * 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).secondaryBackground,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final numCarryOver = [""];
+                                                        
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: List.generate(numCarryOver.length, (numCarryOverIndex) {
+                                        var controller = coControllers.putIfAbsent(numCarryOverIndex, () => TextEditingController());
+                                        return wrapWithModel(
+                                          model: _model.generatedCOFieldModels.getModel(
+                                            numCarryOverIndex.toString(),
+                                            numCarryOverIndex,
+                                          ),
+                                          updateCallback: () => safeSetState(() {}),
+                                          child: GeneratedCOFieldWidget(
+                                            key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
+                                            inputChar: '?',
+                                            ansId: numCarryOverIndex,
+                                            controller: controller
+    
+                                          ),
+                                        );
+                                      }).divide(const SizedBox(width: 8.0)),
+                                    );
+                                  },
+                                ),
+                              ),
+                              AddSubFirstQnFields(model: _model, safeSetState: safeSetState, controllers: firstAddControllers),
+                              AddSubSecondQnFields(model: _model, safeSetState: safeSetState, controllers: secondAddControllers)
+                            ].divide(const SizedBox(height: 8.0)),
+                          ),
+                        ),
+                      ),
+                    ].divide(const SizedBox(width: 28.0)),
+                  ),
+                ),
+                Divider(
+                  thickness:
+                      1.0,
+                  color:
+                      FlutterFlowTheme.of(context).primaryText,
+                ),
+              ],
+            ),
+            AddSubAnsFields(model: _model, safeSetState: safeSetState, controllers: ansControllers),
+          ].divide(const SizedBox(
+              height:
+                  17.0)),
+        ),
+      ),
+    );
+  }
+}
+
+class AddSubAnsFields extends StatefulWidget {
+  const AddSubAnsFields({
+    super.key,
+    required KidWordProblemModel model,
+    required this.safeSetState,
+    required this.controllers,
+  }) : _model = model;
+
+  final KidWordProblemModel _model;
+  final Function(Function()) safeSetState; 
+  final Map<int,TextEditingController> controllers;
+
+  @override
+  createState() => AddSubAnsFieldsState();
+
+}
+
+class AddSubAnsFieldsState extends State<AddSubAnsFields> {
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder:
+          (context) {
+        final numAnswers = ["", ""];
+                                                
+        return Padding(
+          padding: const EdgeInsets.only(left: 45),
+          child: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+                numAnswers.length,
+                (numAnswersIndex) {
+              var controller = widget.controllers.putIfAbsent(
+                      numAnswersIndex, () => TextEditingController());
+              return wrapWithModel(
+                model: widget._model.generatedAnsFieldModels.getModel(
+                  numAnswersIndex.toString(),
+                  numAnswersIndex,
+                ),
+                updateCallback: () => safeSetState(() {}),
+                child: GeneratedAnsFieldWidget(
+                  key: Key(
+                    'Keyfh0_${numAnswersIndex.toString()}',
+                  ),
+                  inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
+                  idx: numAnswersIndex,
+                  textEditingController: controller,
+                  ansControllers: widget.controllers,
+                  updateFn: FFAppState().updateAnsListAtIndex,
+                ),
+                updateOnChange: true,
+              );
+            }).divide(
+                const SizedBox(width: 8.0)),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class AddSubFirstQnFields extends StatefulWidget {
+  const AddSubFirstQnFields({
+    super.key,
+    required KidWordProblemModel model,
+    required this.safeSetState,
+    required this.controllers,
+  }) : _model = model;
+
+  final KidWordProblemModel _model;
+  final Function(Function()) safeSetState; 
+  final Map<int,TextEditingController> controllers;
+
+  @override
+  createState() => AddSubFirstQnFieldsState();
+
+}
+
+class AddSubFirstQnFieldsState extends State<AddSubFirstQnFields> {
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder:
+          (context) {
+        final numAnswers = ["", ""];
+                                                
+        return Row(
+          mainAxisAlignment:
+              MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(
+              numAnswers.length,
+              (numAnswersIndex) {
+            var controller = widget.controllers.putIfAbsent(
+                    numAnswersIndex, () => TextEditingController());
+            return wrapWithModel(
+              model: widget._model.generatedAnsFieldModels.getModel(
+                numAnswersIndex.toString(),
+                numAnswersIndex,
+              ),
+              updateCallback: () => safeSetState(() {}),
+              child: GeneratedAnsFieldWidget(
+                key: Key(
+                  'Keyfj0_${numAnswersIndex.toString()}',
+                ),
+                inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
+                idx: numAnswersIndex,
+                textEditingController: controller,
+                ansControllers: widget.controllers,
+                updateFn: FFAppState().updateAnsListAtIndex,
+              ),
+              updateOnChange: true,
+            );
+          }).divide(
+              const SizedBox(width: 8.0)),
+        );
+      },
+    );
+  }
+}
+
+class AddSubSecondQnFields extends StatefulWidget {
+  const AddSubSecondQnFields({
+    super.key,
+    required KidWordProblemModel model,
+    required this.safeSetState,
+    required this.controllers,
+  }) : _model = model;
+
+  final KidWordProblemModel _model;
+  final Function(Function()) safeSetState; 
+  final Map<int,TextEditingController> controllers;
+
+  @override
+  createState() => AddSubSecondQnFieldsState();
+
+}
+
+class AddSubSecondQnFieldsState extends State<AddSubSecondQnFields> {
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder:
+          (context) {
+        final numAnswers = ["", ""];
+                                                
+        return Row(
+          mainAxisAlignment:
+              MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(
+              numAnswers.length,
+              (numAnswersIndex) {
+            var controller = widget.controllers.putIfAbsent(
+                    numAnswersIndex, () => TextEditingController());
+            return wrapWithModel(
+              model: widget._model.generatedAnsFieldModels.getModel(
+                numAnswersIndex.toString(),
+                numAnswersIndex,
+              ),
+              updateCallback: () => safeSetState(() {}),
+              child: GeneratedAnsFieldWidget(
+                key: Key(
+                  'Keyfi0_${numAnswersIndex.toString()}',
+                ),
+                inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
+                idx: numAnswersIndex,
+                textEditingController: controller,
+                ansControllers: widget.controllers,
+                updateFn: FFAppState().updateAnsListAtIndex,
+              ),
+              updateOnChange: true,
+            );
+          }).divide(
+              const SizedBox(width: 8.0)),
+        );
+      },
     );
   }
 }

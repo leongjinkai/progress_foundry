@@ -208,7 +208,11 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                     StudentAssignmentStruct.maybeFromMap((_model
                                                 .responseQuestionList?.jsonBody ??
                                             ''))!
-                                        .questionLevel),
+                                        .questionLevel,
+                                    StudentAssignmentStruct.maybeFromMap((_model
+                                                .responseQuestionList?.jsonBody ??
+                                            ''))!
+                                        .questionType),
                                 '?',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -755,6 +759,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                                     idx: dividendLengthIndex,
                                                                                     textEditingController: controller,
                                                                                     ansControllers: controllers,
+                                                                                    updateFn: FFAppState().updateAnsListAtIndex,
                                                                                   ),
                                                                                 );
                                                                               }).divide(const SizedBox(width: 8.0)),
@@ -836,6 +841,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                             numAnswersIndex,
                                                                             textEditingController: controller,
                                                                             ansControllers: controllers,
+                                                                            updateFn: FFAppState().updateAnsListAtIndex,
                                                                       ),
                                                                     );
                                                                   }).divide(
@@ -894,6 +900,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                             numAnswersIndex,
                                                                             textEditingController: controller,
                                                                         ansControllers: controllers,
+                                                                        updateFn: FFAppState().updateAnsListAtIndex,
                                                                       ),
                                                                     );
                                                                   }).divide(
@@ -961,6 +968,7 @@ class _KidDivisonWidgetState extends State<KidDivisonWidget> {
                                                                       numAnswersIndex,
                                                                       textEditingController: controller,
                                                                   ansControllers: controllers,
+                                                                  updateFn: FFAppState().updateAnsListAtIndex,
                                                                 ),
         
                                                               );

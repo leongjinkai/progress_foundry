@@ -558,170 +558,7 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
                                                                             11.0)),
                                                                   ),
                                                                 ),
-                                                                Expanded(
-                                                                  child: Container(
-                                                                    padding: const EdgeInsets.symmetric(horizontal: 102),
-                                                                    height: 100.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                    ),
-                                                                    child: Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .min,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize
-                                                                                  .max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment
-                                                                                  .start,
-                                                                          children: [
-                                                                            Container(
-                                                                              
-                                                                              height:
-                                                                                  145.0,
-                                                                              decoration:
-                                                                                  BoxDecoration(
-                                                                                color:
-                                                                                    FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              ),
-                                                                              child:
-                                                                                  Row(
-                                                                                mainAxisSize:
-                                                                                    MainAxisSize.max,
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.end,
-                                                                                crossAxisAlignment:
-                                                                                    CrossAxisAlignment.end,
-                                                                                children:
-                                                                                    [
-                                                                                  Align(
-                                                                                    alignment: const AlignmentDirectional(0.0, 1.4),
-                                                                                    child: Padding(
-                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                                                                                      child: Text(
-                                                                                        valueOrDefault<String>(
-                                                                                          functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
-                                                                                          '?',
-                                                                                        ),
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              fontFamily: 'DM Sans',
-                                                                                              fontSize: 32.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              lineHeight: 1.5,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                  Flexible(
-                                                                                    child: Container(
-                                                                                      height: MediaQuery.sizeOf(context).height * 1.0,
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                      ),
-                                                                                      child: Column(
-                                                                                        mainAxisSize: MainAxisSize.min,
-                                                                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                                                                        children: [
-                                                                                          Padding(
-                                                                                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
-                                                                                            child: Builder(
-                                                                                              builder: (context) {
-                                                                                                final numCarryOver = functions.getCarryOverNumList(FFAppState().newSelectedQnDetail.questionLevel).map((e) => e).toList();
-                                                                                                                    
-                                                                                                return Row(
-                                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                  children: List.generate(numCarryOver.length, (numCarryOverIndex) {
-                                                                                                    var controller = coControllers.putIfAbsent(numCarryOverIndex, () => TextEditingController());
-                                                                                                    return wrapWithModel(
-                                                                                                      model: _model.generatedCOFieldModels.getModel(
-                                                                                                        numCarryOverIndex.toString(),
-                                                                                                        numCarryOverIndex,
-                                                                                                      ),
-                                                                                                      updateCallback: () => safeSetState(() {}),
-                                                                                                      child: GeneratedCOFieldWidget(
-                                                                                                        key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
-                                                                                                        inputChar: '?',
-                                                                                                        ansId: numCarryOverIndex,
-                                                                                                        controller: controller
-
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  }).divide(const SizedBox(width: 8.0)),
-                                                                                                );
-                                                                                              },
-                                                                                            ),
-                                                                                          ),
-                                                                                          Builder(
-                                                                                            builder: (context) {
-                                                                                              final firstNumChar = functions.getFirstNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
-                                                                                              if (firstNumChar.isEmpty) {
-                                                                                                return SvgPicture.asset(
-                                                                                                  'assets/images/assignment_icon.svg',
-                                                                                                );
-                                                                                              }
-                                                                                                                    
-                                                                                              return Row(
-                                                                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                children: List.generate(firstNumChar.length, (firstNumCharIndex) {
-                                                                                                  final firstNumCharItem = firstNumChar[firstNumCharIndex];
-                                                                                                  return GeneratedQnFieldWidget(
-                                                                                                    key: Key('Keyqdf_${firstNumCharIndex}_of_${firstNumChar.length}'),
-                                                                                                    inputChar: firstNumCharItem,
-                                                                                                  );
-                                                                                                }).divide(const SizedBox(width: 8.0)),
-                                                                                              );
-                                                                                            },
-                                                                                          ),
-                                                                                          Builder(
-                                                                                            builder: (context) {
-                                                                                              final secondNumChar = functions.getSecondNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
-                                                                                              if (secondNumChar.isEmpty) {
-                                                                                                return SvgPicture.asset(
-                                                                                                  'assets/images/practice_icon.svg',
-                                                                                                );
-                                                                                              }
-                                                                                                                    
-                                                                                              return Row(
-                                                                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                children: List.generate(secondNumChar.length, (secondNumCharIndex) {
-                                                                                                  final secondNumCharItem = secondNumChar[secondNumCharIndex];
-                                                                                                  return GeneratedQnFieldWidget(
-                                                                                                    key: Key('Keyofe_${secondNumCharIndex}_of_${secondNumChar.length}'),
-                                                                                                    inputChar: secondNumCharItem,
-                                                                                                  );
-                                                                                                }).divide(const SizedBox(width: 8.0)),
-                                                                                              );
-                                                                                            },
-                                                                                          ),
-                                                                                        ].divide(const SizedBox(height: 8.0)),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                ].divide(const SizedBox(width: 28.0)),
-                                                                              ),
-                                                                            ),
-                                                                            Divider(
-                                                                              thickness:
-                                                                                  1.0,
-                                                                              color:
-                                                                                  FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        AddSubAnsFields(model: _model, safeSetState: safeSetState, controllers: ansControllers),
-                                                                      ].divide(const SizedBox(
-                                                                          height:
-                                                                              17.0)),
-                                                                    ),
-                                                                  ),
-                                                                ),
+                                                                AdditionWorking(coControllers: coControllers, model: _model, ansControllers: ansControllers, safeSetState: safeSetState),
                                                                 Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1157,6 +994,189 @@ class _KidAdditionWidgetState extends State<KidAdditionWidget> {
   }
 }
 
+class AdditionWorking extends StatelessWidget {
+  const AdditionWorking({
+    super.key,
+    required this.coControllers,
+    required KidAdditionModel model,
+    required this.ansControllers,
+    required this.safeSetState
+  }) : _model = model;
+
+  final Map<int, TextEditingController> coControllers;
+  final KidAdditionModel _model;
+  final Map<int, TextEditingController> ansControllers;
+  final Function(Function()) safeSetState;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 102),
+        height: 100.0,
+        decoration:
+            BoxDecoration(
+          color: FlutterFlowTheme.of(
+                  context)
+              .secondaryBackground,
+        ),
+        child: Column(
+          mainAxisSize:
+              MainAxisSize
+                  .min,
+          children: [
+            Column(
+              mainAxisSize:
+                  MainAxisSize
+                      .max,
+              mainAxisAlignment:
+                  MainAxisAlignment
+                      .start,
+              children: [
+                Container(
+                  
+                  height:
+                      145.0,
+                  decoration:
+                      BoxDecoration(
+                    color:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child:
+                      Row(
+                    mainAxisSize:
+                        MainAxisSize.max,
+                    mainAxisAlignment:
+                        MainAxisAlignment.end,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.end,
+                    children:
+                        [
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 1.4),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              functions.getOperatorFromTopic(FFAppState().newSelectedQnDetail.questionTopic)!,
+                              '?',
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'DM Sans',
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  lineHeight: 1.5,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Container(
+                          height: MediaQuery.sizeOf(context).height * 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).secondaryBackground,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final numCarryOver = functions.getCarryOverNumList(FFAppState().newSelectedQnDetail.questionLevel).map((e) => e).toList();
+                                                        
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: List.generate(numCarryOver.length, (numCarryOverIndex) {
+                                        var controller = coControllers.putIfAbsent(numCarryOverIndex, () => TextEditingController());
+                                        return wrapWithModel(
+                                          model: _model.generatedCOFieldModels.getModel(
+                                            numCarryOverIndex.toString(),
+                                            numCarryOverIndex,
+                                          ),
+                                          updateCallback: () => safeSetState(() {}),
+                                          child: GeneratedCOFieldWidget(
+                                            key: Key('Keyrrx_${numCarryOverIndex}_of_${numCarryOver.length}'),
+                                            inputChar: '?',
+                                            ansId: numCarryOverIndex,
+                                            controller: controller
+    
+                                          ),
+                                        );
+                                      }).divide(const SizedBox(width: 8.0)),
+                                    );
+                                  },
+                                ),
+                              ),
+                              Builder(
+                                builder: (context) {
+                                  final firstNumChar = functions.getFirstNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
+                                  if (firstNumChar.isEmpty) {
+                                    return SvgPicture.asset(
+                                      'assets/images/assignment_icon.svg',
+                                    );
+                                  }
+                                                        
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: List.generate(firstNumChar.length, (firstNumCharIndex) {
+                                      final firstNumCharItem = firstNumChar[firstNumCharIndex];
+                                      return GeneratedQnFieldWidget(
+                                        key: Key('Keyqdf_${firstNumCharIndex}_of_${firstNumChar.length}'),
+                                        inputChar: firstNumCharItem,
+                                      );
+                                    }).divide(const SizedBox(width: 8.0)),
+                                  );
+                                },
+                              ),
+                              Builder(
+                                builder: (context) {
+                                  final secondNumChar = functions.getSecondNumList(FFAppState().newSelectedQnDetail.question).toList().take(4).toList();
+                                  if (secondNumChar.isEmpty) {
+                                    return SvgPicture.asset(
+                                      'assets/images/practice_icon.svg',
+                                    );
+                                  }
+                                                        
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: List.generate(secondNumChar.length, (secondNumCharIndex) {
+                                      final secondNumCharItem = secondNumChar[secondNumCharIndex];
+                                      return GeneratedQnFieldWidget(
+                                        key: Key('Keyofe_${secondNumCharIndex}_of_${secondNumChar.length}'),
+                                        inputChar: secondNumCharItem,
+                                      );
+                                    }).divide(const SizedBox(width: 8.0)),
+                                  );
+                                },
+                              ),
+                            ].divide(const SizedBox(height: 8.0)),
+                          ),
+                        ),
+                      ),
+                    ].divide(const SizedBox(width: 28.0)),
+                  ),
+                ),
+                Divider(
+                  thickness:
+                      1.0,
+                  color:
+                      FlutterFlowTheme.of(context).primaryText,
+                ),
+              ],
+            ),
+            AddSubAnsFields(model: _model, safeSetState: safeSetState, controllers: ansControllers),
+          ].divide(const SizedBox(
+              height:
+                  17.0)),
+        ),
+      ),
+    );
+  }
+}
+
 class AddSubAnsFields extends StatefulWidget {
   const AddSubAnsFields({
     super.key,
@@ -1213,9 +1233,10 @@ class AddSubAnsFieldsState extends State<AddSubAnsFields> {
                 inputValue: FFAppState().ansList.elementAtOrNull(numAnswersIndex)!,
                 idx: numAnswersIndex,
                 textEditingController: controller,
-                ansControllers: widget.controllers
+                ansControllers: widget.controllers,
+                updateFn: FFAppState().updateAnsListAtIndex,
               ),
-              updateOnChange: true
+              updateOnChange: true,
             );
           }).divide(
               const SizedBox(width: 8.0)),

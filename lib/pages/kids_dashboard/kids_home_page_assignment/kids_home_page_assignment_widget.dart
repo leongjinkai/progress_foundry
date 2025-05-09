@@ -235,6 +235,7 @@ class _KidsHomePageAssignmentWidgetState
                                             assignmentItem.completionRate,
                                         assignmentId: assignmentItem.id.toString(),
                                         qnTopic: assignmentItem.questionTopic,
+                                        qnType: assignmentItem.questionType
                                       ),
                                     );
                                   }).divide(const SizedBox(height: 19.0)),

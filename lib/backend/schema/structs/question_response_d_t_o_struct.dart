@@ -14,13 +14,15 @@ class QuestionResponseDTOStruct extends BaseStruct {
     String? questionType,
     String? question,
     String? options,
+    List<dynamic>? prompts
   })  : _id = id,
         _questionSubject = questionSubject,
         _questionTopic = questionTopic,
         _questionLevel = questionLevel,
         _questionType = questionType,
         _question = question,
-        _options = options;
+        _options = options,
+        _prompts = prompts;
 
   // "id" field.
   int? _id;
@@ -71,6 +73,13 @@ class QuestionResponseDTOStruct extends BaseStruct {
 
   bool hasOptions() => _options != null;
 
+    // "prompts" field.
+  List<dynamic>? _prompts;
+  List<dynamic> get prompts => _prompts ?? [];
+  set prompts(List<dynamic>? val) => _prompts = val;
+
+  bool hasPrompts() => _prompts != null;
+
   static QuestionResponseDTOStruct fromMap(Map<String, dynamic> data) =>
       QuestionResponseDTOStruct(
         id: data['id'] as int?,
@@ -80,6 +89,7 @@ class QuestionResponseDTOStruct extends BaseStruct {
         questionType: data['questionType'] as String?,
         question: data['question'] as String?,
         options: data['options'] as String?,
+        prompts: data['prompts'] as List<dynamic>?
       );
 
   static QuestionResponseDTOStruct? maybeFromMap(dynamic data) => data is Map
